@@ -17,6 +17,20 @@ func _physics_process(delta):
 
 	velocity = velocity.normalized() * speed
 	move_and_slide()
+	
+func fade_texture(texture_rect: TextureRect, target_alpha: float, duration: float) -> void:
+	var start_alpha = texture_rect.modulate.a
+	var timer := 0.0
+	
+	while timer < duration:
+		timer += get_process_delta_time()
+		var t = timer / duration
+		# Smoothstep easing for nicer transition
+		var alpha = lerp(start_alpha, target_alpha, t * t * (3.0 - 2.0 * t))
+		texture_rect.modulate.a = alpha
+		await get_tree().process_frame
+
+	texture_rect.modulate.a = target_alpha  # ensure exact final alpha
 
 func on_enter_water(body: Node2D) -> void:
 	# Ensure it's the player and we have a reference to the bubbles
@@ -46,4 +60,26 @@ func on_enter_water(body: Node2D) -> void:
 			
 		# Optional: Hide node once transition is fully done to save performance
 		tween.tween_callback(func(): bubbles_node.visible = false)
+		
+
+		var underwater_text = get_parent().get_node("Underwater_Text") as TextureRect
+		
+		# Start hidden
+		underwater_text.modulate.a = 0.0
+		underwater_text.visible = true
+		
+		# Wait 1 second BEFORE showing
+		await get_tree().create_timer(1.5).timeout
+		
+		# Fade in
+		await fade_texture(underwater_text, 1.0, 1.0)
+		
+		# Stay visible for 1 second
+		await get_tree().create_timer(1).timeout
+		
+		# Fade out
+		await fade_texture(underwater_text, 0.0, 1.0)
+		
+		underwater_text.visible = false
+		
 		
