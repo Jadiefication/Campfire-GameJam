@@ -1,14 +1,15 @@
 [gd_scene format=3 uid="uid://tyqfqa6lqeoo"]
 
-[ext_resource type="PackedScene" path="res://scenes/bubble_shader.tscn" id="1_hh5oj"]
+[ext_resource type="PackedScene" uid="uid://eoyrkfeb6fl4" path="res://scenes/bubble_shader.tscn" id="1_hh5oj"]
 [ext_resource type="Shader" uid="uid://xt2jid722gi3" path="res://shaders/wave.gdshader" id="1_pvqg0"]
 [ext_resource type="Texture2D" uid="uid://d0285k5iabi3g" path="res://icon.svg" id="2_baglu"]
 [ext_resource type="Script" uid="uid://b8dg2daw424cb" path="res://scripts/background.gd" id="2_hh5oj"]
 [ext_resource type="Texture2D" uid="uid://b6e21y341pn1x" path="res://IMGS/day.jpg" id="2_vqfsp"]
 [ext_resource type="PackedScene" uid="uid://bk8vlqanbro6t" path="res://scenes/rope.tscn" id="3_t45w4"]
 [ext_resource type="PackedScene" uid="uid://c1v7a5htiqcsp" path="res://scenes/player.tscn" id="4_h5ip5"]
+[ext_resource type="Texture2D" uid="uid://bnnqc3a1e87xw" path="res://textpng.png" id="4_jn13j"]
 [ext_resource type="Texture2D" uid="uid://fj3kyn7pqol6" path="res://island.png" id="5_40w10"]
-[ext_resource type="PackedScene" uid="uid://qiulhnrb1h2f" path="res://scenes/fish_spawner.tscn" id="7_hh5oj"]
+[ext_resource type="PackedScene" path="res://scenes/fish_spawner.tscn" id="7_hh5oj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_baglu"]
 size = Vector2(1147, 20)
@@ -31,7 +32,7 @@ shader_parameter/pixel_size = 128.0
 
 [node name="Game" type="Node2D" unique_id=2036010790]
 
-[node name="Bubbles" parent="." instance=ExtResource("1_hh5oj")]
+[node name="Bubbles" parent="." unique_id=1348635199 instance=ExtResource("1_hh5oj")]
 visible = false
 
 [node name="Background" type="TextureRect" parent="." unique_id=1107784584]
@@ -44,6 +45,15 @@ script = ExtResource("2_hh5oj")
 [node name="Timer" type="Timer" parent="Background" unique_id=1897685357]
 wait_time = 1.5099999999999998
 autostart = true
+
+[node name="Underwater_Text" type="TextureRect" parent="." unique_id=1679685836]
+visible = false
+texture_filter = 1
+offset_left = 288.0
+offset_top = 66.0
+offset_right = 909.8348
+offset_bottom = 263.0
+texture = ExtResource("4_jn13j")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=424514134]
 position = Vector2(0, 229)
@@ -81,7 +91,7 @@ polygon = PackedVector2Array(642, 583, 654, 581, 656, 578, 662, 577, 665, 575, 6
 [node name="oxygen_tank" parent="." unique_id=1640028717 instance=ExtResource("3_t45w4")]
 position = Vector2(952, 401)
 
-[connection signal="body_entered" from="Area2D" to="Player" method="on_enter_water"]
-
 [node name="fish_spawner" parent="." unique_id=570606193 instance=ExtResource("7_hh5oj")]
 position = Vector2(220, 471)
+
+[connection signal="body_entered" from="Area2D" to="Player" method="on_enter_water"]
