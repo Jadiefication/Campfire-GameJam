@@ -1,10 +1,9 @@
 extends Area2D
 
-@export var popup_path : NodePath
 var popup
 var player_is_in_area: bool = false
 func _ready():
-	popup = get_node(popup_path)
+	popup = $Label
 	popup.visible = false 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

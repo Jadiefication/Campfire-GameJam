@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://eoyrkfeb6fl4"]
+
+[ext_resource type="Shader" uid="uid://sljgwqkcpivg" path="res://shaders/bubbles.gdshader" id="1_mq4se"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eymii"]
+shader = ExtResource("1_mq4se")
+shader_parameter/water_tint = Color(0.1, 0.4, 0.7, 0.5)
+shader_parameter/transition_fill = 0.0
+shader_parameter/pixel_size = 16.0
+shader_parameter/distortion_strength = 0.01
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1744166050]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=339164417]
+material = SubResource("ShaderMaterial_eymii")
+offset_right = 1151.0
+offset_bottom = 651.0
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="." unique_id=664670095]
