@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://tyqfqa6lqeoo"]
 
-[ext_resource type="Texture2D" uid="uid://chgggjn3ydls7" path="res://IMGS/hf_20260227_162936_fe19b117-8acf-4a83-b1c9-488ba4d16f74.jpeg" id="1"]
-[ext_resource type="PackedScene" uid="uid://eoyrkfeb6fl4" path="res://scenes/bubble_shader.tscn" id="1_hh5oj"]
+[ext_resource type="PackedScene" path="res://scenes/bubble_shader.tscn" id="1_hh5oj"]
 [ext_resource type="Shader" uid="uid://xt2jid722gi3" path="res://shaders/wave.gdshader" id="1_pvqg0"]
 [ext_resource type="Texture2D" uid="uid://d0285k5iabi3g" path="res://icon.svg" id="2_baglu"]
 [ext_resource type="Script" uid="uid://b8dg2daw424cb" path="res://scripts/background.gd" id="2_hh5oj"]
+[ext_resource type="Texture2D" uid="uid://b6e21y341pn1x" path="res://IMGS/day.jpg" id="2_vqfsp"]
 [ext_resource type="PackedScene" uid="uid://bk8vlqanbro6t" path="res://scenes/rope.tscn" id="3_t45w4"]
 [ext_resource type="PackedScene" uid="uid://c1v7a5htiqcsp" path="res://scenes/player.tscn" id="4_h5ip5"]
 [ext_resource type="Texture2D" uid="uid://fj3kyn7pqol6" path="res://island.png" id="5_40w10"]
@@ -36,9 +36,13 @@ visible = false
 [node name="Background" type="TextureRect" parent="." unique_id=1107784584]
 offset_right = 1152.0
 offset_bottom = 645.0
-texture = ExtResource("1")
+texture = ExtResource("2_vqfsp")
 expand_mode = 1
 script = ExtResource("2_hh5oj")
+
+[node name="Timer" type="Timer" parent="Background" unique_id=1897685357]
+wait_time = 1.5099999999999998
+autostart = true
 
 [node name="Area2D" type="Area2D" parent="." unique_id=424514134]
 position = Vector2(0, 229)
