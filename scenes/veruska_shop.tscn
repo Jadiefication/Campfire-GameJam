@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://cyhks2tavx83x"]
+
+[ext_resource type="Script" uid="uid://dj0ysicap1v4d" path="res://scripts/veruska_shop.gd" id="1_31ygd"]
+[ext_resource type="Texture2D" uid="uid://d0285k5iabi3g" path="res://icon.svg" id="2_byrje"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pa2l1"]
+size = Vector2(147, 139)
+
+[node name="Area2D" type="Area2D" unique_id=368821354]
+script = ExtResource("1_31ygd")
+popup_path = NodePath("Label")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1166871780]
+scale = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_pa2l1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=604740194]
+texture = ExtResource("2_byrje")
+
+[node name="Label" type="Label" parent="." unique_id=523147022]
+offset_left = -195.0
+offset_top = -160.0
+offset_right = -12.0
+offset_bottom = -83.0
+text = "Press E to open crafting"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
