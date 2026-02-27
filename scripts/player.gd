@@ -61,6 +61,7 @@ func on_enter_water(body: Node2D) -> void:
 		# Optional: Hide node once transition is fully done to save performance
 		tween.tween_callback(func(): bubbles_node.visible = false)
 		
+
 		var underwater_text = get_parent().get_node("Underwater_Text") as TextureRect
 		
 		# Start hidden

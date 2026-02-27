@@ -8,8 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://bk8vlqanbro6t" path="res://scenes/rope.tscn" id="3_t45w4"]
 [ext_resource type="PackedScene" uid="uid://c1v7a5htiqcsp" path="res://scenes/player.tscn" id="4_h5ip5"]
 [ext_resource type="Texture2D" uid="uid://bnnqc3a1e87xw" path="res://textpng.png" id="4_jn13j"]
-[ext_resource type="Texture2D" uid="uid://fj3kyn7pqol6" path="res://island.png" id="5_40w10"]
 [ext_resource type="PackedScene" path="res://scenes/fish_spawner.tscn" id="7_hh5oj"]
+[ext_resource type="PackedScene" uid="uid://qiulhnrb1h2f" path="res://scenes/fish_spawner.tscn" id="7_hh5oj"]
+[ext_resource type="Texture2D" uid="uid://n4shwtgxjcgo" path="res://IMGS/island.png" id="8_i6jx3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_baglu"]
 size = Vector2(1147, 20)
@@ -70,7 +71,7 @@ scale = Vector2(8.9921875, 1)
 texture = ExtResource("2_baglu")
 
 [node name="Node2D" parent="." unique_id=2004282778 instance=ExtResource("3_t45w4")]
-position = Vector2(956, 454)
+position = Vector2(1063, 345)
 
 [node name="Player" parent="." unique_id=1636654684 instance=ExtResource("4_h5ip5")]
 position = Vector2(861, 431)
@@ -78,20 +79,19 @@ position = Vector2(861, 431)
 [node name="Island" type="StaticBody2D" parent="." unique_id=2020899278]
 position = Vector2(129, 110)
 
-[node name="Sprite2D" type="Sprite2D" parent="Island" unique_id=682509802]
-position = Vector2(820, 411.00003)
-scale = Vector2(0.49582127, 0.4469401)
-texture = ExtResource("5_40w10")
+[node name="Sprite2D" type="Sprite2D" parent="Island" unique_id=602292386]
+position = Vector2(685, 346.00003)
+scale = Vector2(0.6227022, 0.6128837)
+texture = ExtResource("8_i6jx3")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Island" unique_id=616685137]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Island" unique_id=1377206949]
 visible = false
-position = Vector2(-129, -110)
-polygon = PackedVector2Array(642, 583, 654, 581, 656, 578, 662, 577, 665, 575, 678, 572, 699, 560, 706, 557, 716, 542, 739, 530, 752, 513, 752, 503, 806, 481, 830, 481, 856, 469, 875, 465, 950, 465, 958, 465, 960, 467, 972, 468, 975, 471, 1023, 470, 1026, 468, 1052, 467, 1055, 470, 1063, 470, 1071, 473, 1079, 475, 1104, 479, 1111, 481, 1121, 484, 1131, 486, 1134, 487, 1140, 488, 1145, 492, 1151, 497, 1160, 517, 1184, 544, 1232, 572, 1272, 577, 1285, 583, 1202, 640, 1078, 680, 997, 692, 804, 681, 762, 666, 775, 664, 662, 650, 657, 640, 696, 628, 614, 591)
+polygon = PackedVector2Array(458, 535, 349, 486, 472, 439, 481, 414, 512, 405, 525, 369, 594, 338, 624, 335, 683, 317, 706, 312, 896, 320, 1022, 350, 1022, 384, 1022, 534)
 
 [node name="oxygen_tank" parent="." unique_id=1640028717 instance=ExtResource("3_t45w4")]
-position = Vector2(952, 401)
+position = Vector2(968, 291)
 
 [node name="fish_spawner" parent="." unique_id=570606193 instance=ExtResource("7_hh5oj")]
-position = Vector2(220, 471)
+position = Vector2(235, 458)
 
 [connection signal="body_entered" from="Area2D" to="Player" method="on_enter_water"]
