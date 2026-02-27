@@ -2,7 +2,8 @@
 
 [ext_resource type="Shader" uid="uid://xt2jid722gi3" path="res://shaders/wave.gdshader" id="1_pvqg0"]
 [ext_resource type="Texture2D" uid="uid://d0285k5iabi3g" path="res://icon.svg" id="2_baglu"]
-[ext_resource type="PackedScene" path="res://scenes/rope.tscn" id="3_t45w4"]
+[ext_resource type="PackedScene" uid="uid://bk8vlqanbro6t" path="res://scenes/rope.tscn" id="3_t45w4"]
+[ext_resource type="PackedScene" uid="uid://c1v7a5htiqcsp" path="res://scenes/player.tscn" id="4_h5ip5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_baglu"]
 size = Vector2(1147, 20)
@@ -23,9 +24,12 @@ shader_parameter/add_bubble = true
 shader_parameter/bubble_scale = 10.0
 shader_parameter/bubble_speed = 0.5
 
-[node name="Node2D" type="Node2D" unique_id=2036010790]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5ip5"]
+size = Vector2(313, 129)
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1107784584]
+[node name="Node2D2" type="Node2D" unique_id=2036010790]
+
+[node name="Background" type="TextureRect" parent="." unique_id=1107784584]
 offset_right = 1152.0
 offset_bottom = 650.0
 
@@ -44,13 +48,25 @@ scale = Vector2(8.9921875, 1)
 texture = ExtResource("2_baglu")
 
 [node name="fish_spawner" parent="." unique_id=642292370 instance=ExtResource("3_t45w4")]
+position = Vector2(294, -105)
 
-[node name="Island" type="TextureRect" parent="." unique_id=541191371]
-offset_left = 826.0
-offset_top = 518.0
-offset_right = 1150.0
-offset_bottom = 646.0
+[node name="Node2D" parent="." unique_id=2004282778 instance=ExtResource("3_t45w4")]
+position = Vector2(956, 454)
+
+[node name="Player" parent="." unique_id=1636654684 instance=ExtResource("4_h5ip5")]
+position = Vector2(860, 479)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2020899278]
+position = Vector2(129, 110)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1236478400]
+position = Vector2(865.5, 472.5)
+shape = SubResource("RectangleShape2D_h5ip5")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=682509802]
+position = Vector2(866, 473)
+scale = Vector2(2.4375, 1)
 texture = ExtResource("2_baglu")
 
-[node name="oxygen_tank" parent="." unique_id=2004282778 instance=ExtResource("3_t45w4")]
+[node name="oxygen_tank" parent="." unique_id=1640028717 instance=ExtResource("3_t45w4")]
 position = Vector2(956, 456)
