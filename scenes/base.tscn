@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://tyqfqa6lqeoo"]
 
 [ext_resource type="Texture2D" uid="uid://chgggjn3ydls7" path="res://hf_20260227_162936_fe19b117-8acf-4a83-b1c9-488ba4d16f74.jpeg" id="1"]
+[ext_resource type="PackedScene" uid="uid://eoyrkfeb6fl4" path="res://scenes/bubble_shader.tscn" id="1_hh5oj"]
 [ext_resource type="Shader" uid="uid://xt2jid722gi3" path="res://shaders/wave.gdshader" id="1_pvqg0"]
 [ext_resource type="Texture2D" uid="uid://d0285k5iabi3g" path="res://icon.svg" id="2_baglu"]
 [ext_resource type="PackedScene" uid="uid://bk8vlqanbro6t" path="res://scenes/rope.tscn" id="3_t45w4"]
@@ -26,7 +27,10 @@ shader_parameter/bubble_scale = 10.0
 shader_parameter/bubble_speed = 0.5
 shader_parameter/pixel_size = 128.0
 
-[node name="Node2D2" type="Node2D" unique_id=2036010790]
+[node name="Game" type="Node2D" unique_id=2036010790]
+
+[node name="Bubbles" parent="." unique_id=1744166050 instance=ExtResource("1_hh5oj")]
+visible = false
 
 [node name="Background" type="TextureRect" parent="." unique_id=1107784584]
 offset_right = 1152.0
@@ -71,3 +75,5 @@ polygon = PackedVector2Array(642, 583, 654, 581, 656, 578, 662, 577, 665, 575, 6
 
 [node name="oxygen_tank" parent="." unique_id=1640028717 instance=ExtResource("3_t45w4")]
 position = Vector2(952, 401)
+
+[connection signal="body_entered" from="Area2D" to="Player" method="on_enter_water"]
