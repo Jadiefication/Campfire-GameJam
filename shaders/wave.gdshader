@@ -8,7 +8,7 @@ uniform vec4 liquid_color : source_color = vec4(0.2, 0.5, 1.0, 0.8);
 uniform vec4 foam_color : source_color = vec4(0.8, 0.9, 1.0, 0.6);
 
 // Wave property
-uniform float wave_amplitude : hint_range(0.0, 0.1) = 0.02;
+uniform float wave_amplitude : hint_range(0.0, 0.1) = 0.05;
 uniform float wave_frequency : hint_range(0.0, 20.0) = 5.0;
 uniform float wave_speed : hint_range(0.0, 5.0) = 2.0;
 

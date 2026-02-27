@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://tyqfqa6lqeoo"]
 
+[ext_resource type="Texture2D" uid="uid://chgggjn3ydls7" path="res://hf_20260227_162936_fe19b117-8acf-4a83-b1c9-488ba4d16f74.jpeg" id="1"]
 [ext_resource type="Shader" uid="uid://xt2jid722gi3" path="res://shaders/wave.gdshader" id="1_pvqg0"]
 [ext_resource type="Texture2D" uid="uid://d0285k5iabi3g" path="res://icon.svg" id="2_baglu"]
 [ext_resource type="PackedScene" uid="uid://bk8vlqanbro6t" path="res://scenes/rope.tscn" id="3_t45w4"]
-[ext_resource type="PackedScene" uid="uid://c1v7a5htiqcsp" path="res://scenes/player.tscn" id="4_h5ip5"]
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="4_h5ip5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_baglu"]
 size = Vector2(1147, 20)
@@ -31,7 +32,9 @@ size = Vector2(313, 129)
 
 [node name="Background" type="TextureRect" parent="." unique_id=1107784584]
 offset_right = 1152.0
-offset_bottom = 650.0
+offset_bottom = 645.0
+texture = ExtResource("1")
+expand_mode = 1
 
 [node name="Area2D" type="Area2D" parent="." unique_id=424514134]
 position = Vector2(0, 229)
