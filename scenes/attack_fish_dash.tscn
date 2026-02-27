@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bqib3ynb2nivy"]
+
+[ext_resource type="Texture2D" uid="uid://d0285k5iabi3g" path="res://icon.svg" id="1_8lv6u"]
+[ext_resource type="Script" uid="uid://dlw8j77m6qkea" path="res://scripts/attack_fish_dash.gd" id="1_kg1jg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8lv6u"]
+radius = 69.4
+
+[node name="dash_fish_enemy" type="CharacterBody2D" unique_id=909622500]
+script = ExtResource("1_kg1jg")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1463527814]
+texture = ExtResource("1_8lv6u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=388299292]
+shape = SubResource("CircleShape2D_8lv6u")

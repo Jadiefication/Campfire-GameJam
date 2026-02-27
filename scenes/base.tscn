@@ -2,6 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://xt2jid722gi3" path="res://shaders/wave.gdshader" id="1_pvqg0"]
 [ext_resource type="Texture2D" uid="uid://d0285k5iabi3g" path="res://icon.svg" id="2_baglu"]
+[ext_resource type="PackedScene" uid="uid://qiulhnrb1h2f" path="res://scenes/fish_spawner.tscn" id="3_t45w4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_baglu"]
 size = Vector2(1147, 20)
@@ -40,3 +41,5 @@ material = SubResource("ShaderMaterial_t45w4")
 position = Vector2(575.5, 354)
 scale = Vector2(8.9921875, 1)
 texture = ExtResource("2_baglu")
+
+[node name="fish_spawner" parent="." unique_id=642292370 instance=ExtResource("3_t45w4")]

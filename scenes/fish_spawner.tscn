@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://qiulhnrb1h2f"]
+
+[ext_resource type="Script" uid="uid://cvwdpygilbrbc" path="res://scripts/fish_spawner.gd" id="1_auosd"]
+[ext_resource type="PackedScene" uid="uid://bqib3ynb2nivy" path="res://scenes/attack_fish_dash.tscn" id="2_q8in3"]
+[ext_resource type="Texture2D" uid="uid://d0285k5iabi3g" path="res://icon.svg" id="2_sydb0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hb7eh"]
+radius = 11.632331
+
+[node name="fish_spawner" type="Node2D" unique_id=642292370]
+script = ExtResource("1_auosd")
+attack_fish_dash = ExtResource("2_q8in3")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=570606193]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=826868665]
+scale = Vector2(15, 15)
+shape = SubResource("CircleShape2D_hb7eh")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=671118543]
+texture = ExtResource("2_sydb0")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
