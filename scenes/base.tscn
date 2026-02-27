@@ -31,7 +31,7 @@ shader_parameter/pixel_size = 128.0
 
 [node name="Game" type="Node2D" unique_id=2036010790]
 
-[node name="Bubbles" parent="." unique_id=1744166050 instance=ExtResource("1_hh5oj")]
+[node name="Bubbles" parent="." instance=ExtResource("1_hh5oj")]
 visible = false
 
 [node name="Background" type="TextureRect" parent="." unique_id=1107784584]
