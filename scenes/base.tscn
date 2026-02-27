@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://d0285k5iabi3g" path="res://icon.svg" id="2_baglu"]
 [ext_resource type="PackedScene" uid="uid://bk8vlqanbro6t" path="res://scenes/rope.tscn" id="3_t45w4"]
 [ext_resource type="PackedScene" path="res://scenes/player.tscn" id="4_h5ip5"]
+[ext_resource type="Texture2D" uid="uid://fj3kyn7pqol6" path="res://island.png" id="5_40w10"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_baglu"]
 size = Vector2(1147, 20)
@@ -24,9 +25,6 @@ shader_parameter/shine_intensity = 0.3
 shader_parameter/add_bubble = true
 shader_parameter/bubble_scale = 10.0
 shader_parameter/bubble_speed = 0.5
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5ip5"]
-size = Vector2(313, 129)
 
 [node name="Node2D2" type="Node2D" unique_id=2036010790]
 
@@ -57,19 +55,19 @@ position = Vector2(294, -105)
 position = Vector2(956, 454)
 
 [node name="Player" parent="." unique_id=1636654684 instance=ExtResource("4_h5ip5")]
-position = Vector2(860, 479)
+position = Vector2(861, 431)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2020899278]
+[node name="Island" type="StaticBody2D" parent="." unique_id=2020899278]
 position = Vector2(129, 110)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1236478400]
-position = Vector2(865.5, 472.5)
-shape = SubResource("RectangleShape2D_h5ip5")
+[node name="Sprite2D" type="Sprite2D" parent="Island" unique_id=682509802]
+position = Vector2(820, 411.00003)
+scale = Vector2(0.49582127, 0.4469401)
+texture = ExtResource("5_40w10")
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=682509802]
-position = Vector2(866, 473)
-scale = Vector2(2.4375, 1)
-texture = ExtResource("2_baglu")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Island" unique_id=616685137]
+position = Vector2(-129, -110)
+polygon = PackedVector2Array(642, 583, 654, 581, 656, 578, 662, 577, 665, 575, 678, 572, 699, 560, 706, 557, 716, 542, 739, 530, 752, 513, 752, 503, 806, 481, 830, 481, 856, 469, 875, 465, 950, 465, 958, 465, 960, 467, 972, 468, 975, 471, 1023, 470, 1026, 468, 1052, 467, 1055, 470, 1063, 470, 1071, 473, 1079, 475, 1104, 479, 1111, 481, 1121, 484, 1131, 486, 1134, 487, 1140, 488, 1145, 492, 1151, 497, 1160, 517, 1184, 544, 1232, 572, 1272, 577, 1285, 583, 1202, 640, 1078, 680, 997, 692, 804, 681, 762, 666, 775, 664, 662, 650, 657, 640, 696, 628, 614, 591)
 
 [node name="oxygen_tank" parent="." unique_id=1640028717 instance=ExtResource("3_t45w4")]
-position = Vector2(956, 456)
+position = Vector2(952, 401)
