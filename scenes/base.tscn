@@ -1,16 +1,57 @@
 [gd_scene format=3 uid="uid://tyqfqa6lqeoo"]
 
-[ext_resource type="PackedScene" uid="uid://eoyrkfeb6fl4" path="res://scenes/bubble_shader.tscn" id="1_hh5oj"]
+[ext_resource type="PackedScene" path="res://scenes/bubble_shader.tscn" id="1_hh5oj"]
 [ext_resource type="Shader" uid="uid://xt2jid722gi3" path="res://shaders/wave.gdshader" id="1_pvqg0"]
 [ext_resource type="Texture2D" uid="uid://d0285k5iabi3g" path="res://icon.svg" id="2_baglu"]
 [ext_resource type="Script" uid="uid://b8dg2daw424cb" path="res://scripts/background.gd" id="2_hh5oj"]
 [ext_resource type="Texture2D" uid="uid://b6e21y341pn1x" path="res://IMGS/day.jpg" id="2_vqfsp"]
 [ext_resource type="PackedScene" uid="uid://bk8vlqanbro6t" path="res://scenes/rope.tscn" id="3_t45w4"]
-[ext_resource type="PackedScene" uid="uid://c1v7a5htiqcsp" path="res://scenes/player.tscn" id="4_h5ip5"]
+[ext_resource type="PackedScene" uid="uid://652fn3xh6jt7" path="res://scenes/player.tscn" id="4_h5ip5"]
 [ext_resource type="Texture2D" uid="uid://bnnqc3a1e87xw" path="res://textpng.png" id="4_jn13j"]
-[ext_resource type="PackedScene" path="res://scenes/fish_spawner.tscn" id="7_hh5oj"]
 [ext_resource type="PackedScene" uid="uid://qiulhnrb1h2f" path="res://scenes/fish_spawner.tscn" id="7_hh5oj"]
 [ext_resource type="Texture2D" uid="uid://n4shwtgxjcgo" path="res://IMGS/island.png" id="8_i6jx3"]
+
+[sub_resource type="GDScript" id="GDScript_jn13j"]
+script/source = "extends Node2D
+
+# List your background images
+var backgrounds = [
+	preload(\"res://IMGS/day.jpg\"),
+	preload(\"res://IMGS/eve.jpg\"),
+	preload(\"res://IMGS/nigg.jpg\"),
+	preload(\"res://IMGS/mor.jpeg\")
+]
+
+@export var transition_time := 1.5
+var index := 0
+var showing_a := true  # which TextureRect is currently visible
+
+func _ready():
+	$Background.texture = backgrounds[index]
+	$Background.modulate.a = 1.0
+	$Backgg.modulate.a = 0.0
+	$Background/Timer.timeout.connect(_on_timer_timeout)
+
+func _on_timer_timeout():
+	# move to the next image in order
+	index = (index + 1) % backgrounds.size()
+
+	# pick which TextureRect fades in/out
+	var fade_in = $Backgg if showing_a else $Background
+	var fade_out = $Background if showing_a else $Backgg
+
+	# assign next texture to fade_in
+	fade_in.texture = backgrounds[index]
+	fade_in.modulate.a = 0.0
+
+	# create tween: fade out old, fade in new simultaneously
+	var tween = create_tween()
+	tween.tween_property(fade_out, \"modulate:a\", 0.0, transition_time)
+	tween.parallel().tween_property(fade_in, \"modulate:a\", 1.0, transition_time)
+
+	# toggle which TextureRect is active
+	showing_a = !showing_a
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_baglu"]
 size = Vector2(1147, 20)
@@ -32,9 +73,14 @@ shader_parameter/bubble_speed = 0.5
 shader_parameter/pixel_size = 128.0
 
 [node name="Game" type="Node2D" unique_id=2036010790]
+script = SubResource("GDScript_jn13j")
 
 [node name="Bubbles" parent="." unique_id=1348635199 instance=ExtResource("1_hh5oj")]
 visible = false
+
+[node name="Backgg" type="TextureRect" parent="." unique_id=243166322]
+offset_right = 1153.0
+offset_bottom = 648.0
 
 [node name="Background" type="TextureRect" parent="." unique_id=1107784584]
 offset_right = 1152.0
@@ -44,7 +90,7 @@ expand_mode = 1
 script = ExtResource("2_hh5oj")
 
 [node name="Timer" type="Timer" parent="Background" unique_id=1897685357]
-wait_time = 1.5099999999999998
+wait_time = 120.0
 autostart = true
 
 [node name="Underwater_Text" type="TextureRect" parent="." unique_id=1679685836]

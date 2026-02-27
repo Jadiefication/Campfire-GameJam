@@ -16,20 +16,20 @@ func _ready():
 	$Timer.timeout.connect(_on_timer_timeout)
 
 func _on_timer_timeout():
+	$Timer.stop()  # stop timer while fading
+
 	# fade out
-	var tween = create_tween()
-	tween.tween_property(self, "modulate:a", 0.0, transition_time)
+	var tween_out = create_tween()
+	tween_out.tween_property(self, "modulate:a", 0.0, transition_time)
+	await tween_out.finished
 
-	await tween.finished
-
-	# change texture
+	# go to next image in order
 	index = (index + 1) % backgrounds.size()
 	texture = backgrounds[index]
 
 	# fade in
 	var tween_in = create_tween()
 	tween_in.tween_property(self, "modulate:a", 1.0, transition_time)
-
 	await tween_in.finished
 
-	$Timer.start() # resume timer
+	$Timer.start()  # resume timer
