@@ -63,6 +63,7 @@ func _physics_process(delta):
 		print_debug("EnemyFish collided with: ", collider, " (type=", typeof(collider), ", name=", (collider and collider.name))
 		if collider and collider.is_in_group("player"):
 			Global.hp -= 10
+			$AudioStreamPlayer2D.play()
 			explode()
 			stop_movement()
 			return
