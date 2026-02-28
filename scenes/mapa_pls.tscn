@@ -2559,8 +2559,8 @@ visible = false
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1096539495]
 offset_left = -932.0
-offset_right = 1849.1328
-offset_bottom = 1693.0
+offset_right = 2220.0
+offset_bottom = 1983.0
 
 [node name="Far" type="TextureRect" parent="TextureRect" unique_id=282430219]
 texture_filter = 1

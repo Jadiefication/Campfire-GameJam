@@ -35,7 +35,7 @@ func _ready() -> void:
 	if get_parent().name == "World1":
 		GRAVITY /= 2
 		speed /= 2
-		$TextureRect.texture = hp[0]
+		Global.hp = 100
 		
 func change_hp(new_hp: int):
 	new_hp = clamp(new_hp, 0, 100)

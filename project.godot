@@ -10,10 +10,11 @@ config_version=5
 
 [application]
 
-config/name="Campfire Jam"
+config/name="UnderFined"
+config/description="A young guy named Adam Hojer got stranded on an island to cross of something from his bucket list. That beeing..... Deep dive to the depths of the ocean. Join with Adam Hojer to explore the deep vast ocean and gather all it's treasures, but don't forget.... you're not alone."
 run/main_scene="uid://b415pmji38omb"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://bf2hvdg5lmtd0"
 
 [autoload]
 
