@@ -31,6 +31,7 @@ animations = [{
 radius = 68.35203
 
 [node name="Area2D" type="Area2D" unique_id=570606193]
+collision_layer = 2
 script = ExtResource("1_auosd")
 attack_fish_dash = ExtResource("2_q8in3")
 

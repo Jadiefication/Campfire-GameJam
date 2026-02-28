@@ -6,14 +6,14 @@
 [ext_resource type="Script" uid="uid://b8dg2daw424cb" path="res://scripts/background.gd" id="2_hh5oj"]
 [ext_resource type="Texture2D" uid="uid://b6e21y341pn1x" path="res://IMGS/day.jpg" id="2_vqfsp"]
 [ext_resource type="PackedScene" uid="uid://bk8vlqanbro6t" path="res://scenes/oxygen_tank.tscn" id="3_t45w4"]
-[ext_resource type="PackedScene" uid="uid://652fn3xh6jt7" path="res://scenes/player.tscn" id="4_h5ip5"]
-[ext_resource type="PackedScene" path="res://scenes/fish_spawner.tscn" id="7_hh5oj"]
+[ext_resource type="PackedScene" uid="uid://c1v7a5htiqcsp" path="res://scenes/player.tscn" id="4_h5ip5"]
+[ext_resource type="PackedScene" uid="uid://qiulhnrb1h2f" path="res://scenes/fish_spawner.tscn" id="7_hh5oj"]
 [ext_resource type="Texture2D" uid="uid://n4shwtgxjcgo" path="res://IMGS/island.png" id="8_i6jx3"]
 [ext_resource type="Script" uid="uid://bnhodst1lsw4l" path="res://scripts/adam.gd" id="9_dmaw2"]
 [ext_resource type="Texture2D" uid="uid://bcmhr181vs24h" path="res://IMGS/pipe.png" id="12_dmaw2"]
 [ext_resource type="AudioStream" uid="uid://d0qn18na686an" path="res://sounds/bubbles.mp3" id="13_1xxg6"]
-[ext_resource type="PackedScene" path="res://scenes/chest.tscn" id="14_517kj"]
-[ext_resource type="PackedScene" path="res://scenes/zombie.tscn" id="15_ot4hf"]
+[ext_resource type="PackedScene" uid="uid://buxh6wc56mupk" path="res://scenes/chest.tscn" id="14_517kj"]
+[ext_resource type="PackedScene" uid="uid://dvm61g86m55o7" path="res://scenes/zombie.tscn" id="15_ot4hf"]
 [ext_resource type="Texture2D" uid="uid://ddm5pblkn10ls" path="res://IMGS/ui/UI_Flat_Banner02a.png" id="15_vciil"]
 
 [sub_resource type="GDScript" id="GDScript_jn13j"]
@@ -125,6 +125,7 @@ script = ExtResource("9_dmaw2")
 
 [node name="Island" type="StaticBody2D" parent="." unique_id=2020899278]
 position = Vector2(129, 110)
+collision_layer = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Island" unique_id=602292386]
 position = Vector2(685, 346.00003)

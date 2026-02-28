@@ -8,6 +8,7 @@ radius = 69.4
 
 [node name="dash_fish_enemy" type="CharacterBody2D" unique_id=909622500]
 scale = Vector2(0.3, 0.3)
+collision_layer = 4
 script = ExtResource("1_kg1jg")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1463527814]
