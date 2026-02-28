@@ -80,15 +80,18 @@ script = SubResource("GDScript_jn13j")
 visible = false
 
 [node name="Backgg" type="TextureRect" parent="." unique_id=243166322]
-offset_right = 1153.0
+offset_right = 1152.0
 offset_bottom = 648.0
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Background" type="TextureRect" parent="." unique_id=1107784584]
 offset_right = 1152.0
-offset_bottom = 645.0
+offset_bottom = 648.0
 texture = ExtResource("2_vqfsp")
 expand_mode = 1
 script = ExtResource("2_hh5oj")
+metadata/_edit_use_anchors_ = true
 
 [node name="Timer" type="Timer" parent="Background" unique_id=1897685357]
 wait_time = 120.0
