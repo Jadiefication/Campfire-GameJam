@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dvm61g86m55o7"]
+
+[ext_resource type="Texture2D" uid="uid://c7wmfjg04grhi" path="res://IMGS/drowned_zombie_swimming(1).png" id="1_1vlb3"]
+[ext_resource type="Script" uid="uid://lcj6u6qs0jkp" path="res://scenes/zombie.gd" id="1_httt1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_httt1"]
+radius = 254.99997
+height = 769.99994
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1747079483]
+scale = Vector2(0.2, 0.2)
+script = ExtResource("1_httt1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1484160050]
+rotation = 1.813397
+shape = SubResource("CapsuleShape2D_httt1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=675527383]
+texture = ExtResource("1_1vlb3")
