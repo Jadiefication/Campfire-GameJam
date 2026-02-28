@@ -23,10 +23,10 @@ func _physics_process(_delta):
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
 		
-		if collider.is_in_group("player"):
+		if collider and collider.is_in_group("player"):
 			print("Gotcha!")
-			wait_after_hit()
-			
+			await wait_after_hit()
+			break
 
 func wait_after_hit():
 	is_active = false

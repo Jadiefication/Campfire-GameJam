@@ -14,28 +14,20 @@ const JUMP_VELOCITY: float = -600
 @onready var rope_line = get_parent().get_node("PinJoint2D/Line2D")
 @onready var hook = get_parent().get_node("oxygen_tank")
 
-var _money: int = 0
-
-@export var money: int = 0:
-	get:
-		return _money
-	set(value):
-		_money = value
-		change_money()
 # --- INTERNAL VARIABLES ---
 var rope_active: bool = false
 var hook_position: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
+	Global.money_changed.connect(change_money)
 	if hook:
 		hook_position = hook.global_position
 		rope_active = true
 
 	sprite.animation_finished.connect(_on_animation_finished)
 	sprite.play("Idle")
-	change_money()
 	
-func change_money():
+func change_money(money):
 	get_parent().get_node("Banner/Label").text = "$" + str(money)
 
 func _physics_process(delta: float) -> void:

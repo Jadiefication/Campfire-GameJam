@@ -10,9 +10,10 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if player_is_in_area and Input.is_action_just_pressed("Interact"):
+		Global.money += randi_range(10, 25)
 		#TODO open chest gl
 		print("chest opened")
-		pass
+		
 
 
 func _on_body_entered(body: Node2D) -> void:
