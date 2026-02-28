@@ -1,10 +1,10 @@
 extends CharacterBody2D
 
 @export var speed = 200
+@export var rope_length := 100.0  # this will control rope segment count dynamically
 @onready var bubbles_node = get_parent().get_node("Bubbles")
 
 var rope_active = false
-var rope_length = 0.0
 var hook_position = Vector2.ZERO
 
 @onready var rope_line = get_parent().get_node("PinJoint2D/Line2D")
@@ -12,7 +12,6 @@ var hook_position = Vector2.ZERO
 
 func _ready() -> void:
 	hook_position = hook.global_position
-	rope_length = global_position.distance_to(hook_position)
 	rope_active = true
 
 func _physics_process(delta):
@@ -41,10 +40,17 @@ func _physics_process(delta):
 	
 func _process(delta: float) -> void:
 	if rope_active:
-		rope_line.points = [
-			rope_line.to_local(hook_position),
-			rope_line.to_local(global_position)
-		]
+		# Determine number of segments based on radius
+		var segments = clamp(int(rope_length / 5), 2, 50)  # adjust divisor to control density
+		update_rope(segments)
+
+func update_rope(new_points: int):
+	var points = []
+	for i in range(new_points + 1):
+		var t = float(i) / new_points
+		var point = hook_position.lerp(global_position, t)
+		points.append(rope_line.to_local(point))  # convert to Line2D local
+	rope_line.points = points
 	
 func fade_texture(texture_rect: TextureRect, target_alpha: float, duration: float) -> void:
 	var start_alpha = texture_rect.modulate.a
