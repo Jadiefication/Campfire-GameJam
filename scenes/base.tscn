@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bk8vlqanbro6t" path="res://scenes/oxygen_tank.tscn" id="3_t45w4"]
 [ext_resource type="PackedScene" uid="uid://652fn3xh6jt7" path="res://scenes/player.tscn" id="4_h5ip5"]
 [ext_resource type="Texture2D" uid="uid://bnnqc3a1e87xw" path="res://textpng.png" id="4_jn13j"]
-[ext_resource type="PackedScene" path="res://scenes/fish_spawner.tscn" id="7_hh5oj"]
+[ext_resource type="PackedScene" uid="uid://qiulhnrb1h2f" path="res://scenes/fish_spawner.tscn" id="7_hh5oj"]
 [ext_resource type="Texture2D" uid="uid://n4shwtgxjcgo" path="res://IMGS/island.png" id="8_i6jx3"]
 [ext_resource type="Texture2D" uid="uid://bcmhr181vs24h" path="res://IMGS/pipe.png" id="12_dmaw2"]
 
@@ -94,7 +94,7 @@ script = ExtResource("2_hh5oj")
 metadata/_edit_use_anchors_ = true
 
 [node name="Timer" type="Timer" parent="Background" unique_id=1897685357]
-wait_time = 120.0
+wait_time = 7.001
 autostart = true
 
 [node name="Underwater_Text" type="TextureRect" parent="." unique_id=1679685836]
@@ -123,7 +123,7 @@ texture = ExtResource("2_baglu")
 [node name="Node2D" parent="." unique_id=2004282778 instance=ExtResource("3_t45w4")]
 position = Vector2(980, 366)
 
-[node name="Player" parent="." unique_id=1636654684 instance=ExtResource("4_h5ip5")]
+[node name="NiggAdam" parent="." unique_id=1636654684 instance=ExtResource("4_h5ip5")]
 position = Vector2(626, 492)
 rope_length = 500.0
 
@@ -137,7 +137,7 @@ texture = ExtResource("8_i6jx3")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Island" unique_id=1377206949]
 visible = false
-polygon = PackedVector2Array(458, 535, 349, 486, 472, 439, 481, 414, 512, 405, 525, 369, 594, 338, 624, 335, 683, 317, 706, 312, 896, 320, 1022, 350, 1022, 384, 1022, 534)
+polygon = PackedVector2Array(458, 535, 349, 486, 423, 468, 471, 444, 483, 418, 512, 405, 526, 388, 530, 366, 594, 338, 624, 335, 683, 317, 706, 312, 896, 320, 1022, 350, 1022, 384, 1022, 534)
 
 [node name="oxygen_tank" parent="." unique_id=1640028717 instance=ExtResource("3_t45w4")]
 position = Vector2(831, 362)
@@ -148,7 +148,7 @@ position = Vector2(235, 458)
 [node name="PinJoint2D" type="PinJoint2D" parent="." unique_id=1907018193]
 texture_filter = 1
 position = Vector2(766, 345)
-node_a = NodePath("../Player")
+node_a = NodePath("../NiggAdam")
 node_b = NodePath("../oxygen_tank")
 
 [node name="Line2D" type="Line2D" parent="PinJoint2D" unique_id=1473377462]
@@ -159,4 +159,4 @@ width = 20.0
 texture = ExtResource("12_dmaw2")
 texture_mode = 1
 
-[connection signal="body_entered" from="Area2D" to="Player" method="on_enter_water"]
+[connection signal="body_entered" from="Area2D" to="NiggAdam" method="on_enter_water"]
