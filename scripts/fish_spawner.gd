@@ -31,7 +31,7 @@ func spawn_fish(player) -> void:
 	var fish = attack_fish_dash.instantiate()
 
 	var direction = (player.global_position - global_position).normalized()
-	var spawn_distance = 250
+	var spawn_distance = 50
 	fish.global_position = global_position + direction * spawn_distance
 
 	get_parent().add_child(fish)

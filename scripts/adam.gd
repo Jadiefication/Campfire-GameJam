@@ -67,10 +67,17 @@ func _physics_process(delta: float) -> void:
 		hook_position = hook.global_position
 
 	# --- GRAVITY ---
-	if not is_on_floor():
-		velocity.y += GRAVITY * delta
+	var is_in_base = get_tree().current_scene.scene_file_path == "res://scenes/base.tscn"
+
+	if is_in_base:
+		if not is_on_floor():
+			velocity.y += GRAVITY * delta
+		else:
+			velocity.y = 0
 	else:
-		velocity.y = 0
+		# If not in base, gravity is removed (set to 0 effectively)
+		# You can add swimming controls here if needed
+		pass
 		
 	if Input.is_key_pressed(Key.KEY_ESCAPE):
 		change_scenes("res://scenes/main_menu.tscn")

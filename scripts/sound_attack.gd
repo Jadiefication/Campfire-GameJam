@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
-@export var speed := 140
-@export var lifetime := 10.0   # safety lifetime in seconds
+
+@export var speed := 100
+@export var lifetime := 3   # safety lifetime in seconds
 
 var player: Node2D
 var charge_direction := Vector2.ZERO
@@ -44,8 +45,6 @@ func _physics_process(delta):
 	if not is_active:
 		return
 
-	# If we lost the player midgame, recalc direction if possibl
-
 	velocity = charge_direction * speed
 	move_and_slide()
 
@@ -58,8 +57,7 @@ func _physics_process(delta):
 		var collider = col.get_collider()
 		print_debug("EnemyFish collided with: ", collider, " (type=", typeof(collider), ", name=", (collider and collider.name))
 		if collider and collider.is_in_group("player"):
-			Global.hp -= 20
-			explode()
+			Global.hp -= 10
 			stop_movement()
 			return
 
@@ -70,33 +68,3 @@ func stop_movement():
 	await get_tree().create_timer(1.0).timeout
 	queue_free()
 	
-func explode():
-	var particles = preload("res://scenes/explosion.tscn").instantiate()
-	particles.global_position = global_position
-	get_parent().add_child(particles)
-	particles.emitting = true  # enable after adding to scene
-
-	# Optional: shockwave ring
-	var ring = Sprite2D.new()
-	ring.texture = preload("res://IMGS/circle.png")  # white circle
-	ring.global_position = global_position
-	ring.modulate = Color(0.5, 0.8, 1, 0.8)
-
-	# Create a CanvasItemMaterial for additive blending
-	var mat = CanvasItemMaterial.new()
-	mat.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
-	ring.material = mat
-
-	get_parent().add_child(ring)
-
-	# Animate scale and fade
-	var tween = Tween.new()
-	ring.add_child(tween)
-	tween.tween_property(ring, "scale", Vector2(2,2), 0.6)
-	tween.tween_property(ring, "modulate:a", 0.0, 0.6)
-	tween.play()
-
-	# cleanup after animation
-	await get_tree().create_timer(1.2).timeout
-	particles.queue_free()
-	ring.queue_free()

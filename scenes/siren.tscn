@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://dvy1ymmd68kn"]
+
+[ext_resource type="Texture2D" uid="uid://cv1kybb0wlfkg" path="res://IMGS/siren(2).png" id="1_aete2"]
+[ext_resource type="Script" uid="uid://cy2yj6i7864hf" path="res://scripts/siren.gd" id="1_noxer"]
+[ext_resource type="Texture2D" uid="uid://ct7whm2upr0q3" path="res://IMGS/siren_scream(2).png" id="2_noxer"]
+[ext_resource type="PackedScene" uid="uid://clk0bo0tqe2fo" path="res://scenes/sound_attack.tscn" id="2_x53cl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x53cl"]
+radius = 35.0
+height = 100.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oqn5e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_aete2")
+}],
+"loop": true,
+"name": &"passive",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_noxer")
+}],
+"loop": true,
+"name": &"scream",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m2gcs"]
+radius = 343.52585
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=33838428]
+collision_layer = 4
+script = ExtResource("1_noxer")
+sound_attack = ExtResource("2_x53cl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2113729131]
+position = Vector2(449, 62)
+shape = SubResource("CapsuleShape2D_x53cl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=99918214]
+position = Vector2(409, 64.99999)
+scale = Vector2(0.2, 0.204)
+sprite_frames = SubResource("SpriteFrames_oqn5e")
+animation = &"passive"
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1660359872]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=177314543]
+position = Vector2(450, 61)
+shape = SubResource("CircleShape2D_m2gcs")
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=1673327887]
+wait_time = 2.0
+
+[node name="PoseSwitchTimer" type="Timer" parent="." unique_id=1431913648]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="PoseSwitchTimer" to="." method="_on_pose_switch_timer_timeout"]

@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://bcmhr181vs24h" path="res://IMGS/pipe.png" id="13_emdhy"]
 [ext_resource type="Texture2D" uid="uid://dmuqlisthyhib" path="res://IMGS/ui/All.png" id="15_xg242"]
 [ext_resource type="AudioStream" uid="uid://d0qn18na686an" path="res://sounds/bubbles.mp3" id="19_ogfxj"]
+[ext_resource type="PackedScene" uid="uid://dvy1ymmd68kn" path="res://scenes/siren.tscn" id="21_vvx7h"]
 
 [sub_resource type="Shader" id="1"]
 code = "shader_type canvas_item;
@@ -2726,3 +2727,6 @@ position = Vector2(935, -79)
 
 [node name="BubbleSFX" type="AudioStreamPlayer2D" parent="." unique_id=229040356]
 stream = ExtResource("19_ogfxj")
+
+[node name="CharacterBody2D4" parent="." unique_id=33838428 instance=ExtResource("21_vvx7h")]
+position = Vector2(501, 1227)
