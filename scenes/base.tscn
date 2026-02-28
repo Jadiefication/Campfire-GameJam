@@ -122,6 +122,7 @@ position = Vector2(980, 366)
 
 [node name="Player" parent="." unique_id=1636654684 instance=ExtResource("4_h5ip5")]
 position = Vector2(626, 492)
+rope_length = 500.0
 
 [node name="Island" type="StaticBody2D" parent="." unique_id=2020899278]
 position = Vector2(129, 110)
