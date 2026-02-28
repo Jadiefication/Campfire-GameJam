@@ -41,6 +41,7 @@ func _physics_process(delta):
 				if "Global" in ProjectSettings.globalize_path("res://"): pass
 				
 			Global.hp -= 10
+			$AudioStreamPlayer2D.play()
 			await wait_after_hit()
 			break
 

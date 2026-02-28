@@ -63,6 +63,8 @@ func _physics_process(delta):
 		print_debug("EnemyFish collided with: ", collider, " (type=", typeof(collider), ", name=", (collider and collider.name))
 		if collider and collider.is_in_group("player"):
 			Global.hp -= 10
+			$AudioStreamPlayer2D.play()
+			explode()
 			stop_movement()
 			return
 
@@ -103,4 +105,3 @@ func explode():
 	await get_tree().create_timer(1.2).timeout
 	particles.queue_free()
 	ring.queue_free()
-
