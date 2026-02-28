@@ -2,6 +2,8 @@ extends Area2D
 var player_is_in_area: bool = false
 var popup
 
+var claimed = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	popup = $Label
@@ -9,10 +11,12 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if player_is_in_area and Input.is_action_just_pressed("Interact"):
+	if player_is_in_area and Input.is_action_just_pressed("Interact") and !claimed:
 		Global.money += randi_range(10, 25)
 		#TODO open chest gl
 		print("chest opened")
+		claimed = true
+		$Timer.start()
 		
 
 
@@ -26,3 +30,7 @@ func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		popup.visible = false
 		player_is_in_area = false
+
+
+func _on_timer_timeout() -> void:
+	claimed = false

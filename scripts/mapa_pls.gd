@@ -1,7 +1,7 @@
 extends Node2D
 
 func _ready() -> void:
-	var underwater_text = $Underwater_Text as TextureRect
+	var underwater_text = $CharacterBody2D/Camera2D/Underwater_Text as TextureRect
 	if underwater_text:
 		show_underwater_text(underwater_text)
 		

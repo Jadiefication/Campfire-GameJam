@@ -2,14 +2,51 @@
 
 [ext_resource type="Texture2D" uid="uid://swnmyifx7lkq" path="res://IMGS/tilemap1.png" id="1_gol5h"]
 [ext_resource type="Script" uid="uid://blddvgw34dbsq" path="res://scripts/mapa_pls.gd" id="1_x2awj"]
+[ext_resource type="PackedScene" uid="uid://eoyrkfeb6fl4" path="res://scenes/bubble_shader.tscn" id="2_7mfh0"]
 [ext_resource type="Texture2D" uid="uid://bnnqc3a1e87xw" path="res://textpng.png" id="2_7ykll"]
 [ext_resource type="PackedScene" uid="uid://buxh6wc56mupk" path="res://scenes/chest.tscn" id="2_x2awj"]
 [ext_resource type="PackedScene" uid="uid://qiulhnrb1h2f" path="res://scenes/fish_spawner.tscn" id="3_7ykll"]
+[ext_resource type="Texture2D" uid="uid://c1ks7jpi55478" path="res://IMGS/title/far.png" id="3_ogfxj"]
+[ext_resource type="Texture2D" uid="uid://cndvyneft6tr3" path="res://IMGS/title/sand.png" id="4_xg242"]
+[ext_resource type="Texture2D" uid="uid://nx5rf0nrds4e" path="res://IMGS/title/foreground-1.png" id="5_vvx7h"]
+[ext_resource type="Texture2D" uid="uid://b2g4x5syc17ek" path="res://IMGS/title/foreground-2.png" id="6_8p7sb"]
 [ext_resource type="Texture2D" uid="uid://ddm5pblkn10ls" path="res://IMGS/ui/UI_Flat_Banner02a.png" id="6_x5sg4"]
 [ext_resource type="PackedScene" uid="uid://dvm61g86m55o7" path="res://scenes/zombie.tscn" id="7_myhk2"]
 [ext_resource type="AudioStream" uid="uid://0npph65pat50" path="res://sounds/ytmp3free.cc_submerged-ocean-ambient-music-underwater-sounds-youtubemp3free.org.mp3" id="8_myhk2"]
 [ext_resource type="PackedScene" uid="uid://c1v7a5htiqcsp" path="res://scenes/player.tscn" id="9_txjws"]
 [ext_resource type="Script" uid="uid://bnhodst1lsw4l" path="res://scripts/adam.gd" id="10_127b4"]
+[ext_resource type="Shader" uid="uid://e7igo45fo1by" path="res://shaders/ocean.gdshader" id="11_05jtr"]
+[ext_resource type="PackedScene" uid="uid://bk8vlqanbro6t" path="res://scenes/oxygen_tank.tscn" id="12_wak0d"]
+[ext_resource type="Texture2D" uid="uid://bcmhr181vs24h" path="res://IMGS/pipe.png" id="13_emdhy"]
+[ext_resource type="AudioStream" uid="uid://d0qn18na686an" path="res://sounds/bubbles.mp3" id="19_ogfxj"]
+
+[sub_resource type="Shader" id="1"]
+code = "shader_type canvas_item;
+
+uniform float speed = 0.05;
+
+void fragment() {
+    vec2 uv = UV;
+    uv.x -= TIME * speed;
+    uv = fract(uv);     // wraps UV so it tiles properly
+    COLOR = texture(TEXTURE, uv);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_73413"]
+shader = SubResource("1")
+shader_parameter/speed = 0.03
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bleqs"]
+shader = SubResource("1")
+shader_parameter/speed = 0.12
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6xfuw"]
+shader = SubResource("1")
+shader_parameter/speed = 0.28
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yop7p"]
+shader = SubResource("1")
+shader_parameter/speed = 0.28
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y2eox"]
 texture = ExtResource("1_gol5h")
@@ -2470,8 +2507,80 @@ sources/0 = SubResource("TileSetAtlasSource_y2eox")
 font_size = 20
 font_color = Color(0, 0, 0, 1)
 
-[node name="Node2D" type="Node2D" unique_id=973428691]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5b7n5"]
+shader = ExtResource("11_05jtr")
+shader_parameter/tint_color = Vector3(0, 0.4, 0.7)
+shader_parameter/intensity = 0.3
+shader_parameter/distortion_strength = 2.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wak0d"]
+normal = Vector2(1, 0)
+distance = 20480.0
+
+[node name="World1" type="Node2D" unique_id=973428691]
 script = ExtResource("1_x2awj")
+
+[node name="Bubbles" parent="." unique_id=1744166050 instance=ExtResource("2_7mfh0")]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1096539495]
+offset_left = -932.0
+offset_right = 1849.1328
+offset_bottom = 1693.0
+
+[node name="Far" type="TextureRect" parent="TextureRect" unique_id=282430219]
+texture_filter = 1
+material = SubResource("ShaderMaterial_73413")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 398.0
+offset_top = -2.0
+offset_right = 398.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ogfxj")
+expand_mode = 1
+
+[node name="Sand" type="TextureRect" parent="TextureRect" unique_id=1244350057]
+texture_filter = 1
+material = SubResource("ShaderMaterial_bleqs")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 398.0
+offset_top = -2.0
+offset_right = 398.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_xg242")
+expand_mode = 1
+
+[node name="Foreground1" type="TextureRect" parent="TextureRect" unique_id=564744994]
+texture_filter = 1
+material = SubResource("ShaderMaterial_6xfuw")
+layout_mode = 0
+offset_left = 398.0
+offset_top = -2.0
+offset_right = 398.0
+offset_bottom = -2.0
+texture = ExtResource("5_vvx7h")
+expand_mode = 1
+
+[node name="Foreground2" type="TextureRect" parent="TextureRect" unique_id=19837083]
+texture_filter = 1
+material = SubResource("ShaderMaterial_yop7p")
+layout_mode = 0
+offset_left = 398.0
+offset_top = -2.0
+offset_right = 398.0
+offset_bottom = -2.0
+texture = ExtResource("6_8p7sb")
+expand_mode = 1
 
 [node name="Chest2" parent="." unique_id=1329740356 instance=ExtResource("2_x2awj")]
 position = Vector2(1567, 1310)
@@ -2487,34 +2596,6 @@ position = Vector2(-34, 861)
 [node name="Area2D" parent="." unique_id=570606193 instance=ExtResource("3_7ykll")]
 position = Vector2(1867, 512)
 scale = Vector2(-1, 1)
-
-[node name="Banner" type="TextureRect" parent="." unique_id=1377057694]
-texture_filter = 1
-offset_left = 878.0
-offset_top = 19.0
-offset_right = 1120.0
-offset_bottom = 74.0
-texture = ExtResource("6_x5sg4")
-expand_mode = 3
-
-[node name="Label" type="Label" parent="Banner" unique_id=1874999297]
-texture_filter = 1
-layout_mode = 0
-offset_left = 44.0
-offset_top = 7.0
-offset_right = 201.0
-offset_bottom = 35.0
-text = "0$"
-label_settings = SubResource("LabelSettings_jhl44")
-
-[node name="Underwater_Text" type="TextureRect" parent="." unique_id=2135291448]
-visible = false
-texture_filter = 1
-offset_left = 239.0
-offset_top = 66.0
-offset_right = 915.0
-offset_bottom = 265.26996
-texture = ExtResource("2_7ykll")
 
 [node name="Area2D2" parent="." unique_id=130372644 instance=ExtResource("3_7ykll")]
 position = Vector2(185, 1084)
@@ -2533,12 +2614,79 @@ position = Vector2(0, 57)
 stream = ExtResource("8_myhk2")
 autoplay = true
 
+[node name="PinJoint2D" type="PinJoint2D" parent="." unique_id=1799270197]
+texture_filter = 1
+position = Vector2(749, 385)
+node_a = NodePath("../CharacterBody2D")
+node_b = NodePath("../oxygen_tank")
+
+[node name="Line2D" type="Line2D" parent="PinJoint2D" unique_id=1157650805]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(262.99997, -393)
+scale = Vector2(0.7452624, 0.6524824)
+points = PackedVector2Array(1, 10, -11, 11, -22, 22, -33, 32, -44, 42, -55, 52, -66, 62, -77, 72, -91.24298, 76.63043, -103.319275, 81.22827, -80.508545, 206.90213, -83.19226, 272.8043, -52.330566, 499.63034)
+width = 20.0
+texture = ExtResource("13_emdhy")
+texture_mode = 1
+
 [node name="CharacterBody2D" parent="." unique_id=614309881 instance=ExtResource("9_txjws")]
 position = Vector2(976, 356)
 script = ExtResource("10_127b4")
+rope_length = 2000.0
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=1457011786]
 limit_left = -323
 limit_top = 0
 limit_smoothed = true
 position_smoothing_enabled = true
+
+[node name="Banner" type="TextureRect" parent="CharacterBody2D/Camera2D" unique_id=1377057694]
+texture_filter = 1
+offset_left = -98.0
+offset_top = -293.0
+offset_right = 144.0
+offset_bottom = -238.0
+texture = ExtResource("6_x5sg4")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="CharacterBody2D/Camera2D/Banner" unique_id=1874999297]
+texture_filter = 1
+layout_mode = 0
+offset_left = 44.0
+offset_top = 7.0
+offset_right = 201.0
+offset_bottom = 35.0
+text = "0$"
+label_settings = SubResource("LabelSettings_jhl44")
+
+[node name="Underwater_Text" type="TextureRect" parent="CharacterBody2D/Camera2D" unique_id=2135291448]
+visible = false
+texture_filter = 1
+offset_left = -336.0
+offset_top = -218.0
+offset_right = 340.0
+offset_bottom = -18.730042
+texture = ExtResource("2_7ykll")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=640104217]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1674483065]
+material = SubResource("ShaderMaterial_5b7n5")
+offset_left = -889.0
+offset_top = -8.0
+offset_right = 11588.0
+offset_bottom = 8745.0
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="CanvasLayer" unique_id=2072952519]
+
+[node name="oxygen_tank" parent="." unique_id=1604457158 instance=ExtResource("12_wak0d")]
+position = Vector2(935, -79)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=789162994]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1918394315]
+shape = SubResource("WorldBoundaryShape2D_wak0d")
+
+[node name="BubbleSFX" type="AudioStreamPlayer2D" parent="." unique_id=229040356]
+stream = ExtResource("19_ogfxj")
