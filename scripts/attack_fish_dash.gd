@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed := 400
+@export var speed := 250
 var player
 var charge_direction = Vector2.ZERO
 var is_active = true

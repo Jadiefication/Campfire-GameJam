@@ -6,7 +6,7 @@ extends CharacterBody2D
 
 # --- CONSTANTS ---
 const GRAVITY: float = 1200.0
-const JUMP_VELOCITY: float = -400.0
+const JUMP_VELOCITY: float = -600
 
 # --- NODE REFERENCES ---
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -14,11 +14,14 @@ const JUMP_VELOCITY: float = -400.0
 @onready var rope_line = get_parent().get_node("PinJoint2D/Line2D")
 @onready var hook = get_parent().get_node("oxygen_tank")
 
-@export var money: int = 0:
-	set(value):
-		money = value
-		change_money()
+var _money: int = 0
 
+@export var money: int = 0:
+	get:
+		return _money
+	set(value):
+		_money = value
+		change_money()
 # --- INTERNAL VARIABLES ---
 var rope_active: bool = false
 var hook_position: Vector2 = Vector2.ZERO
@@ -70,7 +73,7 @@ func _physics_process(delta: float) -> void:
 			sprite.play("Walk")
 		sprite.flip_h = direction < 0
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.x = lerp(velocity.x, 0.0, 0.1)
 		if sprite.animation == "Walk":
 			sprite.play("Idle")
 

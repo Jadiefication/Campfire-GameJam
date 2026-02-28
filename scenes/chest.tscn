@@ -26,7 +26,11 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gqd3d"]
+size = Vector2(72, 67)
+
 [node name="Chest" type="Area2D" unique_id=1329740356]
+collision_layer = 2
 script = ExtResource("1_gqd3d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=972433500]
@@ -47,6 +51,13 @@ offset_bottom = -51.0
 text = "Press E to open chest"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1778084858]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=184919901]
+position = Vector2(-1, 0.5)
+shape = SubResource("RectangleShape2D_gqd3d")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
