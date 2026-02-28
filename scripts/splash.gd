@@ -2,9 +2,11 @@ extends Control
 
 @onready var splash = $SplashOverlay
 @onready var logo = $SplashOverlay/SplashLogo
+@onready var splash_sound = $SplashSound
 
 func _ready():
 	# Wait 1.5 seconds
+	splash_sound.play()
 	await get_tree().create_timer(1.5).timeout
 
 	# Create one tween and fade both at once
