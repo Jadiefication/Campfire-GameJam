@@ -4,10 +4,6 @@ extends CharacterBody2D
 @export var speed: float = 200.0
 @export var rope_length: float = 500.0
 
-# --- CONSTANTS ---
-const GRAVITY: float = 1200.0
-const JUMP_VELOCITY: float = -400.0
-
 # --- NODE REFERENCES ---
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var bubbles_node = get_parent().get_node("Bubbles")
@@ -19,72 +15,64 @@ var rope_active: bool = false
 var hook_position: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
+	# Initialize hook position and turn on the rope
 	if hook:
 		hook_position = hook.global_position
 		rope_active = true
-
+	
+	# Connect the signal for the "one-shot" animation reset
 	sprite.animation_finished.connect(_on_animation_finished)
+	
+	# Start in a clean state
 	sprite.play("Idle")
 
-func _physics_process(delta: float) -> void:
-	var direction = Input.get_axis("move_left", "move_right")
+func _physics_process(_delta: float) -> void:
+	var input_dir = Vector2.ZERO
 
-	# --- UPDATE HOOK POSITION ---
-	if hook:
-		hook_position = hook.global_position
-
-	# --- GRAVITY ---
-	if not is_on_floor():
-		velocity.y += GRAVITY * delta
-	else:
-		velocity.y = 0
-
-	# --- JUMP ---
-	if Input.is_key_pressed(Key.KEY_SPACE):	
+	# 1. HANDLE INPUT
+	input_dir.x = Input.get_axis("move_left", "move_right")
+	input_dir.y = Input.get_axis("move_up", "move_down")
 	
-		# Only jump if on floor
-		if is_on_floor():
-			if direction == 0:
-				# Simple vertical jump
-				velocity.y = JUMP_VELOCITY
-				sprite.play("Jump")
-			else:
-				# Diagonal jump
-				velocity.y = JUMP_VELOCITY
-				velocity.x = velocity.x * speed
-				sprite.play("Jump")
-
-	# --- HORIZONTAL MOVEMENT ---
-	if direction != 0:
-		velocity.x = direction * speed
+	# 2. HANDLE VELOCITY & ANIMATIONS
+	if input_dir != Vector2.ZERO:
+		velocity = input_dir.normalized() * speed
+		
+		# Only play Walk if we aren't already walking
 		if sprite.animation != "Walk":
 			sprite.play("Walk")
-		sprite.flip_h = direction < 0
+		
+		# Flip sprite based on direction
+		if input_dir.x != 0:
+			sprite.flip_h = input_dir.x < 0
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity = Vector2.ZERO
+		
+		# If we WERE walking but just stopped, trigger the one-shot Idle
 		if sprite.animation == "Walk":
 			sprite.play("Idle")
 
-	# --- ROPE CONSTRAINT --- 
+	# 3. ROPE PHYSICS CONSTRAINT
 	if rope_active:
 		var to_player = global_position - hook_position
 		var dist = to_player.length()
 
 		if dist > rope_length and dist != 0:
-			var dir = to_player / dist
+			var direction = to_player / dist
 			var excess = dist - rope_length
-			global_position -= dir * excess
-
-			var tangent = Vector2(-dir.y, dir.x)
+			# Pull player back to the rope's limit
+			global_position -= direction * excess
+			# Prevent movement from fighting the rope
+			var tangent = Vector2(-direction.y, direction.x)
 			velocity = velocity.project(tangent)
 
+	# 4. EXECUTE MOVEMENT
 	move_and_slide()
 
-	# --- ROPE VISUAL ---
+	# 5. UPDATE ROPE VISUALS
 	if rope_active and rope_line:
 		update_rope_visuals()
 
-# ---------------- HELPERS ----------------
+# --- HELPER FUNCTIONS ---
 
 func update_rope_visuals() -> void:
 	var segments = clamp(int(rope_length / 5), 2, 50)
@@ -96,8 +84,10 @@ func update_rope_visuals() -> void:
 	rope_line.points = points
 
 func _on_animation_finished() -> void:
-	sprite.stop()
-	sprite.animation = &"None"
+	# If Idle finishes (and it's NOT set to loop), clear the animation
+	if sprite.animation == "Idle":
+		sprite.stop()
+		sprite.animation = &"None" # Resets to a non-existent/empty state
 
 # --- WATER TRANSITION LOGIC ---
 
@@ -107,12 +97,15 @@ func on_enter_water(body: Node2D) -> void:
 		var mat = bubbles_node.get_node("ColorRect").material
 		get_parent().get_node("BubbleSFX").play()
 		var tween = create_tween()
-
+		
+		# Bubble splash in
 		tween.tween_property(mat, "shader_parameter/transition_fill", 1.5, 0.6).set_trans(Tween.TRANS_SINE)
 		tween.tween_interval(1.0)
+		# Bubble clear out
 		tween.tween_property(mat, "shader_parameter/transition_fill", 0.0, 0.6).set_trans(Tween.TRANS_SINE)
 		tween.tween_callback(func(): bubbles_node.visible = false)
 
+		# Underwater Text Display
 		var underwater_text = get_parent().get_node("Underwater_Text") as TextureRect
 		if underwater_text:
 			show_underwater_text(underwater_text)

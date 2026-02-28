@@ -7,13 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://b6e21y341pn1x" path="res://IMGS/day.jpg" id="2_vqfsp"]
 [ext_resource type="PackedScene" uid="uid://bk8vlqanbro6t" path="res://scenes/oxygen_tank.tscn" id="3_t45w4"]
 [ext_resource type="PackedScene" uid="uid://652fn3xh6jt7" path="res://scenes/player.tscn" id="4_h5ip5"]
-[ext_resource type="Texture2D" uid="uid://bnnqc3a1e87xw" path="res://textpng.png" id="4_jn13j"]
-[ext_resource type="PackedScene" uid="uid://qiulhnrb1h2f" path="res://scenes/fish_spawner.tscn" id="7_hh5oj"]
+[ext_resource type="PackedScene" path="res://scenes/fish_spawner.tscn" id="7_hh5oj"]
 [ext_resource type="Texture2D" uid="uid://n4shwtgxjcgo" path="res://IMGS/island.png" id="8_i6jx3"]
 [ext_resource type="Script" uid="uid://bnhodst1lsw4l" path="res://scripts/adam.gd" id="9_dmaw2"]
 [ext_resource type="Texture2D" uid="uid://bcmhr181vs24h" path="res://IMGS/pipe.png" id="12_dmaw2"]
 [ext_resource type="AudioStream" uid="uid://d0qn18na686an" path="res://sounds/bubbles.mp3" id="13_1xxg6"]
 [ext_resource type="PackedScene" uid="uid://buxh6wc56mupk" path="res://scenes/chest.tscn" id="14_517kj"]
+[ext_resource type="PackedScene" uid="uid://dvm61g86m55o7" path="res://scenes/zombie.tscn" id="15_ot4hf"]
 
 [sub_resource type="GDScript" id="GDScript_jn13j"]
 script/source = "extends Node2D
@@ -100,15 +100,6 @@ metadata/_edit_use_anchors_ = true
 wait_time = 120.0
 autostart = true
 
-[node name="Underwater_Text" type="TextureRect" parent="." unique_id=1679685836]
-visible = false
-texture_filter = 1
-offset_left = 288.0
-offset_top = 66.0
-offset_right = 909.8348
-offset_bottom = 263.0
-texture = ExtResource("4_jn13j")
-
 [node name="Area2D" type="Area2D" parent="." unique_id=424514134]
 position = Vector2(0, 229)
 
@@ -166,5 +157,9 @@ stream = ExtResource("13_1xxg6")
 
 [node name="Chest" parent="." unique_id=1329740356 instance=ExtResource("14_517kj")]
 position = Vector2(977, 416)
+
+[node name="CharacterBody2D" parent="Chest" unique_id=1747079483 instance=ExtResource("15_ot4hf")]
+position = Vector2(-807, -189.00002)
+scale = Vector2(-0.2, 0.2)
 
 [connection signal="body_entered" from="Area2D" to="NiggAdam" method="on_enter_water"]

@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c1ks7jpi55478" path="res://IMGS/title/far.png" id="1"]
 [ext_resource type="Script" uid="uid://2vdk1t32pgvn" path="res://scripts/splash.gd" id="1_flqon"]
 [ext_resource type="Texture2D" uid="uid://cndvyneft6tr3" path="res://IMGS/title/sand.png" id="2"]
+[ext_resource type="AudioStream" uid="uid://86hjsf4god4w" path="res://sounds/ytmp3free.cc_underwater-cosmic-lofi-deep-ocean-chill-beats-for-study-sleep-relax-1-hour-youtubemp3free.org.mp3" id="2_7b55j"]
 [ext_resource type="Texture2D" uid="uid://nx5rf0nrds4e" path="res://IMGS/title/foreground-1.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://b2g4x5syc17ek" path="res://IMGS/title/foreground-2.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://cristrwolcr87" path="res://IMGS/title/maintitle.png" id="5_lgwnu"]
@@ -51,6 +52,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_flqon")
+
+[node name="Music" type="AudioStreamPlayer2D" parent="." unique_id=1335180447]
+stream = ExtResource("2_7b55j")
+volume_db = -7.29
 
 [node name="Far" type="TextureRect" parent="." unique_id=2069665196]
 texture_filter = 1
