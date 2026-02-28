@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b415pmji38omb"]
 
 [ext_resource type="Texture2D" uid="uid://c1ks7jpi55478" path="res://IMGS/title/far.png" id="1"]
+[ext_resource type="Script" uid="uid://2vdk1t32pgvn" path="res://scripts/splash.gd" id="1_flqon"]
 [ext_resource type="Texture2D" uid="uid://cndvyneft6tr3" path="res://IMGS/title/sand.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://nx5rf0nrds4e" path="res://IMGS/title/foreground-1.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://b2g4x5syc17ek" path="res://IMGS/title/foreground-2.png" id="4"]
@@ -47,6 +48,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_flqon")
 
 [node name="Far" type="TextureRect" parent="." unique_id=2069665196]
 texture_filter = 1
@@ -160,6 +162,22 @@ offset_left = 1041.0
 offset_top = 547.0
 offset_right = 1160.0
 offset_bottom = 666.0
+texture = ExtResource("11_j7ex8")
+
+[node name="SplashOverlay" type="ColorRect" parent="." unique_id=40922560]
+layout_mode = 0
+offset_top = -4.0
+offset_right = 1162.0
+offset_bottom = 666.0
+color = Color(0.5070965, 0.73186594, 1, 1)
+
+[node name="SplashLogo" type="TextureRect" parent="SplashOverlay" unique_id=120408164]
+texture_filter = 1
+layout_mode = 0
+offset_left = 447.0
+offset_top = 183.0
+offset_right = 718.0
+offset_bottom = 454.0
 texture = ExtResource("11_j7ex8")
 
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
