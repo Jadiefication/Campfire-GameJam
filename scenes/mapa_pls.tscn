@@ -1,6 +1,8 @@
-[gd_scene format=3 uid="uid://ctrq7q5baat5u"]
+[gd_scene format=3 uid="uid://ddddvoqgiycek"]
 
 [ext_resource type="Texture2D" uid="uid://swnmyifx7lkq" path="res://IMGS/tilemap1.png" id="1_gol5h"]
+[ext_resource type="Script" uid="uid://blddvgw34dbsq" path="res://scripts/mapa_pls.gd" id="1_x2awj"]
+[ext_resource type="Texture2D" uid="uid://bnnqc3a1e87xw" path="res://textpng.png" id="2_7ykll"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y2eox"]
 texture = ExtResource("1_gol5h")
@@ -2313,6 +2315,16 @@ tile_size = Vector2i(64, 64)
 sources/0 = SubResource("TileSetAtlasSource_y2eox")
 
 [node name="Node2D" type="Node2D" unique_id=973428691]
+script = ExtResource("1_x2awj")
+
+[node name="Underwater_Text" type="TextureRect" parent="." unique_id=2135291448]
+visible = false
+texture_filter = 1
+offset_left = 239.0
+offset_top = 66.0
+offset_right = 915.0
+offset_bottom = 265.26996
+texture = ExtResource("2_7ykll")
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1113311344]
 tile_set = SubResource("TileSet_x2awj")

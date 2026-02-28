@@ -16,3 +16,4 @@ func _ready():
 	await tween.finished
 
 	splash.visible = false
+	$Music.play()
