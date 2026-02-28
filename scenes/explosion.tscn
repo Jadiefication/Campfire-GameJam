@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dc2o5wiv32nga"]
+
+[sub_resource type="Gradient" id="Gradient_3oo6d"]
+colors = PackedColorArray(0.6651851, 0.85430586, 1, 0.8, 0.66668326, 0.8548469, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_17npe"]
+gradient = SubResource("Gradient_3oo6d")
+
+[sub_resource type="Curve" id="Curve_3oo6d"]
+_data = [Vector2(0, 0.20195061), 0.0, 0.0, 0, 0, Vector2(1, 0.5972461), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_17npe"]
+curve = SubResource("Curve_3oo6d")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3oo6d"]
+particle_flag_disable_z = true
+inherit_velocity_ratio = 50.0
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.099999994
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_17npe")
+color = Color(0.66668326, 0.8548469, 1, 0.70000005)
+color_ramp = SubResource("GradientTexture1D_17npe")
+
+[node name="GPUParticles2D" type="GPUParticles2D" unique_id=350193181]
+emitting = false
+amount = 50
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_3oo6d")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=257158969]
