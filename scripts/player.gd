@@ -3,6 +3,18 @@ extends CharacterBody2D
 @export var speed = 200
 @onready var bubbles_node = get_parent().get_node("Bubbles")
 
+var rope_active = false
+var rope_length = 0.0
+var hook_position = Vector2.ZERO
+
+@onready var rope_line = get_parent().get_node("PinJoint2D/Line2D")
+@onready var hook = get_parent().get_node("oxygen_tank")
+
+func _ready() -> void:
+	hook_position = hook.global_position
+	rope_length = global_position.distance_to(hook_position)
+	rope_active = true
+
 func _physics_process(delta):
 	velocity = Vector2.ZERO
 
@@ -14,9 +26,25 @@ func _physics_process(delta):
 		velocity.y += 1
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
+		
+	if rope_active:
+		var to_player = global_position - hook_position
+		var dist = to_player.length()
+	
+		if dist > rope_length:
+			global_position = hook_position + to_player.normalized() * rope_length
+			var tangent = Vector2(-to_player.y, to_player.x).normalized()
+			velocity = velocity.project(tangent)
 
 	velocity = velocity.normalized() * speed
 	move_and_slide()
+	
+func _process(delta: float) -> void:
+	if rope_active:
+		rope_line.points = [
+			rope_line.to_local(hook_position),
+			rope_line.to_local(global_position)
+		]
 	
 func fade_texture(texture_rect: TextureRect, target_alpha: float, duration: float) -> void:
 	var start_alpha = texture_rect.modulate.a
