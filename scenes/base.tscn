@@ -6,10 +6,12 @@
 [ext_resource type="Script" uid="uid://b8dg2daw424cb" path="res://scripts/background.gd" id="2_hh5oj"]
 [ext_resource type="Texture2D" uid="uid://b6e21y341pn1x" path="res://IMGS/day.jpg" id="2_vqfsp"]
 [ext_resource type="PackedScene" uid="uid://bk8vlqanbro6t" path="res://scenes/oxygen_tank.tscn" id="3_t45w4"]
-[ext_resource type="PackedScene" uid="uid://652fn3xh6jt7" path="res://scenes/player.tscn" id="4_h5ip5"]
+[ext_resource type="PackedScene" uid="uid://c1v7a5htiqcsp" path="res://scenes/player.tscn" id="4_h5ip5"]
 [ext_resource type="Texture2D" uid="uid://bnnqc3a1e87xw" path="res://textpng.png" id="4_jn13j"]
 [ext_resource type="PackedScene" uid="uid://qiulhnrb1h2f" path="res://scenes/fish_spawner.tscn" id="7_hh5oj"]
 [ext_resource type="Texture2D" uid="uid://n4shwtgxjcgo" path="res://IMGS/island.png" id="8_i6jx3"]
+[ext_resource type="Script" uid="uid://bnhodst1lsw4l" path="res://scripts/adam.gd" id="9_dmaw2"]
+[ext_resource type="Script" path="res://scripts/oxygen_tank.gd" id="11_1xxg6"]
 [ext_resource type="Texture2D" uid="uid://bcmhr181vs24h" path="res://IMGS/pipe.png" id="12_dmaw2"]
 
 [sub_resource type="GDScript" id="GDScript_jn13j"]
@@ -73,141 +75,6 @@ shader_parameter/bubble_scale = 10.0
 shader_parameter/bubble_speed = 0.5
 shader_parameter/pixel_size = 128.0
 
-[sub_resource type="GDScript" id="GDScript_6irmp"]
-script/source = "extends CharacterBody2D
-
-@export var speed = 200
-@export var rope_length := 500.0  # this will control rope segment count dynamically
-@onready var bubbles_node = get_parent().get_node(\"Bubbles\")
-
-var rope_active = false
-var hook_position = Vector2.ZERO
-
-@onready var rope_line = get_parent().get_node(\"PinJoint2D/Line2D\")
-@onready var hook = get_parent().get_node(\"oxygen_tank\")
-
-func _ready() -> void:
-	hook_position = hook.global_position
-	rope_active = true
-
-func _physics_process(delta):
-	velocity = Vector2.ZERO
-
-	if Input.is_action_pressed(\"move_right\"):
-		velocity.x += 1
-	if Input.is_action_pressed(\"move_left\"):
-		velocity.x -= 1
-	if Input.is_action_pressed(\"move_down\"):
-		velocity.y += 1
-	if Input.is_action_pressed(\"move_up\"):
-		velocity.y -= 1
-		
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
-	else:
-		velocity = Vector2.ZERO
-		
-	if rope_active:
-		var to_player = global_position - hook_position
-		var dist = to_player.length()
-
-		if dist > rope_length and dist != 0:
-			var direction = to_player / dist  # safe normalization
-			var excess = dist - rope_length
-			global_position -= direction * excess  # pull back along rope
-			var tangent = Vector2(-direction.y, direction.x)
-			velocity = velocity.project(tangent)
-	# --- Normalize safely ---
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
-
-	# --- Move ---
-	move_and_slide()
-
-	# --- Update rope for visuals ---
-	if rope_active:
-		var segments = clamp(int(rope_length / 5), 2, 50)
-		update_rope(segments)
-	
-func physics_process(delta: float) -> void:
-	if rope_active:
-		# Determine number of segments based on radius
-		var segments = clamp(int(rope_length / 5), 2, 50)  # adjust divisor to control density
-		update_rope(segments)
-
-func update_rope(new_points: int):
-	var points = []
-	for i in range(new_points + 1):
-		var t = float(i) / new_points
-		var point = hook_position.lerp(global_position, t)
-		points.append(rope_line.to_local(point))  # convert to Line2D local
-	rope_line.points = points
-	
-func fade_texture(texture_rect: TextureRect, target_alpha: float, duration: float) -> void:
-	var start_alpha = texture_rect.modulate.a
-	var timer := 0.0
-	
-	while timer < duration:
-		timer += get_process_delta_time()
-		var t = timer / duration
-		# Smoothstep easing for nicer transition
-		var alpha = lerp(start_alpha, target_alpha, t * t * (3.0 - 2.0 * t))
-		texture_rect.modulate.a = alpha
-		await get_tree().process_frame
-
-	texture_rect.modulate.a = target_alpha  # ensure exact final alpha
-
-func on_enter_water(body: Node2D) -> void:
-	# Ensure it's the player and we have a reference to the bubbles
-	if body == self and bubbles_node:
-		# 1. Make sure bubbles are visible (at 0.0 fill, they are transparent)
-		bubbles_node.visible = true
-		
-		# 2. Get the shader material
-		# Assuming the shader is on the root of the Bubbles scene or a ColorRect inside it
-		var mat = bubbles_node.get_node(\"ColorRect\").material
-
-		# 3. Create the \"Splash In\" animation
-		var tween = create_tween()
-		
-		# Animate transition_fill from 0.0 to 1.5 (Full bubble coverage)
-		tween.tween_property(mat, \"shader_parameter/transition_fill\", 1.5, 0.6)\\
-			.set_trans(Tween.TRANS_SINE)\\
-			.set_ease(Tween.EASE_OUT)
-		
-		# 4. Wait for 1 second (your original delay)
-		tween.tween_interval(1.0)
-		
-		# 5. Create the \"Back to Normal\" animation
-		tween.tween_property(mat, \"shader_parameter/transition_fill\", 0.0, 0.6)\\
-			.set_trans(Tween.TRANS_SINE)\\
-			.set_ease(Tween.EASE_IN)
-			
-		# Optional: Hide node once transition is fully done to save performance
-		tween.tween_callback(func(): bubbles_node.visible = false)
-		
-
-		var underwater_text = get_parent().get_node(\"Underwater_Text\") as TextureRect
-		
-		# Start hidden
-		underwater_text.modulate.a = 0.0
-		underwater_text.visible = true
-		
-		# Wait 1 second BEFORE showing
-		await get_tree().create_timer(1.5).timeout
-		
-		# Fade in
-		await fade_texture(underwater_text, 1.0, 1.0)
-		
-		# Stay visible for 1 second
-		await get_tree().create_timer(1).timeout
-		
-		# Fade out
-		await fade_texture(underwater_text, 0.0, 1.0)
-		
-		underwater_text.visible = false
-"
-
 [node name="Game" type="Node2D" unique_id=2036010790]
 script = SubResource("GDScript_jn13j")
 
@@ -229,7 +96,7 @@ script = ExtResource("2_hh5oj")
 metadata/_edit_use_anchors_ = true
 
 [node name="Timer" type="Timer" parent="Background" unique_id=1897685357]
-wait_time = 7.001
+wait_time = 120.0
 autostart = true
 
 [node name="Underwater_Text" type="TextureRect" parent="." unique_id=1679685836]
@@ -255,14 +122,9 @@ position = Vector2(575.5, 354)
 scale = Vector2(8.9921875, 1)
 texture = ExtResource("2_baglu")
 
-[node name="Node2D" parent="." unique_id=2004282778 instance=ExtResource("3_t45w4")]
-position = Vector2(980, 366)
-
 [node name="NiggAdam" parent="." unique_id=1636654684 instance=ExtResource("4_h5ip5")]
-position = Vector2(663, 427)
-script = SubResource("GDScript_6irmp")
-speed = 200
-rope_length = 500.0
+position = Vector2(668, 429)
+script = ExtResource("9_dmaw2")
 
 [node name="Island" type="StaticBody2D" parent="." unique_id=2020899278]
 position = Vector2(129, 110)
@@ -277,23 +139,24 @@ visible = false
 polygon = PackedVector2Array(458, 535, 349, 486, 423, 468, 471, 444, 483, 418, 512, 405, 526, 388, 530, 366, 594, 338, 624, 335, 683, 317, 706, 312, 896, 320, 1022, 350, 1022, 384, 1022, 534)
 
 [node name="oxygen_tank" parent="." unique_id=1640028717 instance=ExtResource("3_t45w4")]
-position = Vector2(831, 362)
+position = Vector2(749, 385)
+script = ExtResource("11_1xxg6")
 
 [node name="fish_spawner" parent="." unique_id=570606193 instance=ExtResource("7_hh5oj")]
 position = Vector2(235, 458)
 
 [node name="PinJoint2D" type="PinJoint2D" parent="." unique_id=1907018193]
 texture_filter = 1
-position = Vector2(766, 345)
+position = Vector2(749, 385)
 node_a = NodePath("../NiggAdam")
 node_b = NodePath("../oxygen_tank")
 
 [node name="Line2D" type="Line2D" parent="PinJoint2D" unique_id=1473377462]
 texture_filter = 1
 texture_repeat = 2
-position = Vector2(3.054552, -2.4113486)
-scale = Vector2(0.85454565, 0.75886506)
-points = PackedVector2Array(1, 10, -11, 11, -22, 22, -33, 32, -44, 42, -55, 52, -66, 62, -77, 72, -88, 82, -100, 92, -111, 102, -123, 111, -124, 111)
+position = Vector2(0.9999771, -5.000002)
+scale = Vector2(0.7452624, 0.6524824)
+points = PackedVector2Array(1, 10, -11, 11, -22, 22, -33, 32, -44, 42, -55, 52, -66, 62, -77, 72, -91.24298, 76.63043, -103.319275, 81.22827, -114.05377, 81.22827, -123.44641, 84.29346, -120.76282, 72.03259)
 width = 20.0
 texture = ExtResource("12_dmaw2")
 texture_mode = 1

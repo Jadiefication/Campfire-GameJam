@@ -1,0 +1,185 @@
+[gd_scene format=3 uid="uid://b415pmji38omb"]
+
+[ext_resource type="Texture2D" uid="uid://c1ks7jpi55478" path="res://IMGS/title/far.png" id="1"]
+[ext_resource type="Script" uid="uid://2vdk1t32pgvn" path="res://scripts/splash.gd" id="1_flqon"]
+[ext_resource type="Texture2D" uid="uid://cndvyneft6tr3" path="res://IMGS/title/sand.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://nx5rf0nrds4e" path="res://IMGS/title/foreground-1.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://b2g4x5syc17ek" path="res://IMGS/title/foreground-2.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://cristrwolcr87" path="res://IMGS/title/maintitle.png" id="5_lgwnu"]
+[ext_resource type="Texture2D" uid="uid://cqrlgk6n4qfrh" path="res://IMGS/ui/UI_Flat_Bar07a.png" id="6_flqon"]
+[ext_resource type="Script" uid="uid://blj23t6ruy5js" path="res://scripts/play_button.gd" id="7_rcqid"]
+[ext_resource type="Texture2D" uid="uid://dxx8u7ex1flhe" path="res://IMGS/title/play.png" id="8_1ajci"]
+[ext_resource type="Texture2D" uid="uid://b65jlnyyqhccl" path="res://IMGS/title/credits.png" id="9_7b55j"]
+[ext_resource type="Texture2D" uid="uid://cjematp2n0u33" path="res://IMGS/title/quit.png" id="10_5pajh"]
+[ext_resource type="Texture2D" uid="uid://bf2hvdg5lmtd0" path="res://IMGS/icon.png" id="11_j7ex8"]
+
+[sub_resource type="Shader" id="1"]
+code = "shader_type canvas_item;
+
+uniform float speed = 0.05;
+
+void fragment() {
+    vec2 uv = UV;
+    uv.x -= TIME * speed;
+    uv = fract(uv);     // wraps UV so it tiles properly
+    COLOR = texture(TEXTURE, uv);
+}"
+
+[sub_resource type="ShaderMaterial" id="2"]
+shader = SubResource("1")
+shader_parameter/speed = 0.03
+
+[sub_resource type="ShaderMaterial" id="3"]
+shader = SubResource("1")
+shader_parameter/speed = 0.12
+
+[sub_resource type="ShaderMaterial" id="4"]
+shader = SubResource("1")
+shader_parameter/speed = 0.28
+
+[sub_resource type="ShaderMaterial" id="5"]
+shader = SubResource("1")
+shader_parameter/speed = 0.28
+
+[node name="Control" type="Control" unique_id=420266252]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_flqon")
+
+[node name="Far" type="TextureRect" parent="." unique_id=2069665196]
+texture_filter = 1
+material = SubResource("2")
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("1")
+expand_mode = 1
+
+[node name="Sand" type="TextureRect" parent="." unique_id=1349787591]
+texture_filter = 1
+material = SubResource("3")
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("2")
+expand_mode = 1
+
+[node name="Foreground1" type="TextureRect" parent="." unique_id=421136092]
+texture_filter = 1
+material = SubResource("4")
+layout_mode = 0
+texture = ExtResource("3")
+expand_mode = 1
+
+[node name="Foreground2" type="TextureRect" parent="." unique_id=727784520]
+texture_filter = 1
+material = SubResource("5")
+layout_mode = 0
+texture = ExtResource("4")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1941835019]
+texture_filter = 1
+layout_mode = 0
+offset_left = 261.0
+offset_top = 49.0
+offset_right = 881.0
+offset_bottom = 205.0
+texture = ExtResource("5_lgwnu")
+
+[node name="Button" type="Button" parent="." unique_id=2029817989]
+texture_filter = 1
+layout_mode = 0
+offset_left = 452.0
+offset_top = 268.0
+offset_right = 684.3117
+offset_bottom = 372.0
+icon = ExtResource("6_flqon")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("7_rcqid")
+
+[node name="TextureRect" type="TextureRect" parent="Button" unique_id=1627117580]
+texture_filter = 1
+layout_mode = 0
+offset_left = 63.0
+offset_top = 25.0
+offset_right = 180.2131
+offset_bottom = 80.0
+texture = ExtResource("8_1ajci")
+
+[node name="Button2" type="Button" parent="." unique_id=1222092760]
+texture_filter = 1
+layout_mode = 0
+offset_left = 453.0
+offset_top = 373.0
+offset_right = 685.3117
+offset_bottom = 477.0
+icon = ExtResource("6_flqon")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="Button2" unique_id=1444548274]
+texture_filter = 1
+layout_mode = 0
+offset_left = 22.0
+offset_top = 25.0
+offset_right = 214.0
+offset_bottom = 78.0
+texture = ExtResource("9_7b55j")
+
+[node name="Button3" type="Button" parent="." unique_id=64767885]
+texture_filter = 1
+layout_mode = 0
+offset_left = 453.0
+offset_top = 480.0
+offset_right = 685.3117
+offset_bottom = 584.0
+icon = ExtResource("6_flqon")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="Button3" unique_id=793986385]
+texture_filter = 1
+layout_mode = 0
+offset_left = 62.0
+offset_top = 24.0
+offset_right = 174.0
+offset_bottom = 77.0
+texture = ExtResource("10_5pajh")
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1546356221]
+texture_filter = 1
+layout_mode = 0
+offset_left = 1041.0
+offset_top = 547.0
+offset_right = 1160.0
+offset_bottom = 666.0
+texture = ExtResource("11_j7ex8")
+
+[node name="SplashOverlay" type="ColorRect" parent="." unique_id=40922560]
+layout_mode = 0
+offset_top = -4.0
+offset_right = 1162.0
+offset_bottom = 666.0
+color = Color(0.5070965, 0.73186594, 1, 1)
+
+[node name="SplashLogo" type="TextureRect" parent="SplashOverlay" unique_id=120408164]
+texture_filter = 1
+layout_mode = 0
+offset_left = 447.0
+offset_top = 183.0
+offset_right = 718.0
+offset_bottom = 454.0
+texture = ExtResource("11_j7ex8")
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
+[connection signal="pressed" from="Button2" to="Button" method="_on_credits_pressed"]
+[connection signal="pressed" from="Button3" to="Button" method="_on_quit_pressed"]
