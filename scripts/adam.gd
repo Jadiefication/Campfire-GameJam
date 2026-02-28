@@ -24,6 +24,7 @@ var hook_position: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	Global.money_changed.connect(change_money)
+	Global.hp_changed.connect(change_hp)
 	if hook:
 		hook_position = hook.global_position
 		rope_active = true
@@ -34,6 +35,19 @@ func _ready() -> void:
 	if get_parent().name == "World1":
 		GRAVITY /= 2
 		speed /= 2
+		$TextureRect.texture = hp[0]
+		
+func change_hp(new_hp: int):
+	new_hp = clamp(new_hp, 0, 100)
+	
+	# Each texture covers an equal range
+	var range_size: float = 100.0 / hp.size()
+	var index: int = int(floor((100 - new_hp) / range_size))
+	
+	# Make sure index stays within bounds
+	index = clamp(index, 0, hp.size() - 1)
+	
+	$TextureRect.texture = hp[index]
 	
 func change_money(money):
 	if get_node_or_null("Camera2D") != null:

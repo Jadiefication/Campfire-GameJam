@@ -24,7 +24,7 @@ func _physics_process(_delta):
 		var collider = collision.get_collider()
 		
 		if collider and collider.is_in_group("player"):
-			print("Gotcha!")
+			Global.hp -= 10
 			await wait_after_hit()
 			break
 

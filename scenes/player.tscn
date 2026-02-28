@@ -69,7 +69,8 @@ animation = &"Jump"
 frame_progress = 0.51035786
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=827045815]
-offset_left = -25.0
-offset_top = -81.0
-offset_right = 11.0
-offset_bottom = -45.0
+texture_filter = 1
+offset_left = -49.0
+offset_top = -82.0
+offset_right = 49.77777
+offset_bottom = -54.0
