@@ -6,7 +6,7 @@ extends CharacterBody2D
 
 # --- CONSTANTS ---
 const GRAVITY: float = 1200.0
-const JUMP_VELOCITY: float = -400.0
+const JUMP_VELOCITY: float = -600
 
 # --- NODE REFERENCES ---
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
