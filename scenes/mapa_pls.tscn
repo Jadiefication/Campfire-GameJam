@@ -2501,7 +2501,8 @@ texture_region_size = Vector2i(64, 64)
 
 [sub_resource type="TileSet" id="TileSet_x2awj"]
 tile_size = Vector2i(64, 64)
-physics_layer_0/collision_layer = 2
+physics_layer_0/collision_layer = 4
+physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_y2eox")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vvx7h"]
@@ -2549,10 +2550,6 @@ shader = ExtResource("11_05jtr")
 shader_parameter/tint_color = Vector3(0, 0.4, 0.7)
 shader_parameter/intensity = 0.3
 shader_parameter/distortion_strength = 2.0
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wak0d"]
-normal = Vector2(1, 0)
-distance = 20480.0
 
 [node name="World1" type="Node2D" unique_id=973428691]
 script = ExtResource("1_x2awj")
@@ -2669,6 +2666,7 @@ texture_mode = 1
 
 [node name="CharacterBody2D" parent="." unique_id=614309881 instance=ExtResource("9_txjws")]
 position = Vector2(976, 356)
+collision_mask = 6
 script = ExtResource("10_127b4")
 rope_length = 2000.0
 hp = Array[AtlasTexture]([SubResource("AtlasTexture_vvx7h"), SubResource("AtlasTexture_8p7sb"), SubResource("AtlasTexture_73413"), SubResource("AtlasTexture_bleqs"), SubResource("AtlasTexture_6xfuw"), SubResource("AtlasTexture_yop7p"), SubResource("AtlasTexture_lvqyh"), SubResource("AtlasTexture_5acj2"), SubResource("AtlasTexture_g4ixy")])
@@ -2720,11 +2718,6 @@ offset_bottom = 8745.0
 
 [node name="oxygen_tank" parent="." unique_id=1604457158 instance=ExtResource("12_wak0d")]
 position = Vector2(935, -79)
-
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=789162994]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1918394315]
-shape = SubResource("WorldBoundaryShape2D_wak0d")
 
 [node name="BubbleSFX" type="AudioStreamPlayer2D" parent="." unique_id=229040356]
 stream = ExtResource("19_ogfxj")

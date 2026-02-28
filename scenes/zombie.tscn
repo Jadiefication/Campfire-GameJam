@@ -11,7 +11,7 @@ height = 769.99994
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1747079483]
 scale = Vector2(0.2, 0.2)
-collision_layer = 4
+collision_layer = 2
 script = ExtResource("1_httt1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1484160050]

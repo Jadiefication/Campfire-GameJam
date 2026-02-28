@@ -40,6 +40,9 @@ func _ready() -> void:
 func change_hp(new_hp: int):
 	new_hp = clamp(new_hp, 0, 100)
 	
+	if new_hp == 0:
+		change_scenes("res://scenes/main_menu.tscn")
+	
 	# Each texture covers an equal range
 	var range_size: float = 100.0 / hp.size()
 	var index: int = int(floor((100 - new_hp) / range_size))
