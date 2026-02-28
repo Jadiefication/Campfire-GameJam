@@ -5,7 +5,7 @@ extends CharacterBody2D
 @export var rope_length: float = 500.0
 
 # --- CONSTANTS ---
-const GRAVITY: float = 1200.0
+var GRAVITY: float = 1200.0
 const JUMP_VELOCITY: float = -600
 
 # --- NODE REFERENCES ---
@@ -33,10 +33,17 @@ func _ready() -> void:
 
 	sprite.animation_finished.connect(_on_animation_finished)
 	sprite.play("Idle")
+	
+	if get_parent().name == "World1":
+		GRAVITY /= 2
+	
 	change_money()
 	
 func change_money():
-	get_parent().get_node("Banner/Label").text = "$" + str(money)
+	if get_node_or_null("Camera2D") != null:
+		$Camera2D.get_node("Banner/Label").text = "$" + str(money)
+	else:
+		get_parent().get_node("Banner/Label").text = "$" + str(money)
 
 func _physics_process(delta: float) -> void:
 	var direction = Input.get_axis("move_left", "move_right")
@@ -76,6 +83,14 @@ func _physics_process(delta: float) -> void:
 		velocity.x = lerp(velocity.x, 0.0, 0.1)
 		if sprite.animation == "Walk":
 			sprite.play("Idle")
+			
+	if get_parent().name == "World1":
+		if Input.is_key_pressed(Key.KEY_W):
+			velocity.y = JUMP_VELOCITY / 4
+		if Input.is_key_pressed(Key.KEY_S):
+			velocity.y = -JUMP_VELOCITY / 4
+		if Input.is_key_pressed(Key.KEY_E):
+			change_scenes("res://scenes/base.tscn")
 
 	# --- ROPE CONSTRAINT --- 
 	if rope_active:
@@ -115,17 +130,19 @@ func _on_animation_finished() -> void:
 
 func on_enter_water(body: Node2D) -> void:
 	if body == self and bubbles_node:
-		bubbles_node.visible = true
-		var mat = bubbles_node.get_node("ColorRect").material
-		get_parent().get_node("BubbleSFX").play()
-		var tween = create_tween()
-
-		tween.tween_property(mat, "shader_parameter/transition_fill", 1.5, 0.6).set_trans(Tween.TRANS_SINE)
-		tween.tween_interval(1.0)
-		tween.tween_property(mat, "shader_parameter/transition_fill", 0.0, 0.6).set_trans(Tween.TRANS_SINE)
+		change_scenes("res://scenes/mapa_pls.tscn")
 		
-		tween.tween_callback(func(): 
-				bubbles_node.visible = false
-				get_tree().change_scene_to_file("res://scenes/mapa_pls.tscn")
-		)
-		
+func change_scenes(new_scene: String):
+	bubbles_node.visible = true
+	var mat = bubbles_node.get_node("ColorRect").material
+	get_parent().get_node("BubbleSFX").play()
+	var tween = create_tween()
+			
+	tween.tween_property(mat, "shader_parameter/transition_fill", 1.5, 0.6).set_trans(Tween.TRANS_SINE)
+	tween.tween_interval(1.0)
+	tween.tween_property(mat, "shader_parameter/transition_fill", 0.0, 0.6).set_trans(Tween.TRANS_SINE)
+			
+	tween.tween_callback(func(): 
+		bubbles_node.visible = false
+		get_tree().change_scene_to_file(new_scene)
+	)
