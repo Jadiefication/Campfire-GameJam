@@ -29,6 +29,7 @@ func _ready() -> void:
 	
 	if get_parent().name == "World1":
 		GRAVITY /= 2
+		speed /= 2
 	
 func change_money(money):
 	if get_node_or_null("Camera2D") != null:
@@ -48,6 +49,9 @@ func _physics_process(delta: float) -> void:
 		velocity.y += GRAVITY * delta
 	else:
 		velocity.y = 0
+		
+	if Input.is_key_pressed(Key.KEY_ESCAPE):
+		change_scenes("res://scenes/main_menu.tscn")
 
 	# --- JUMP ---
 	if Input.is_key_pressed(Key.KEY_SPACE):	
@@ -80,7 +84,7 @@ func _physics_process(delta: float) -> void:
 			velocity.y = JUMP_VELOCITY / 4
 		if Input.is_key_pressed(Key.KEY_S):
 			velocity.y = -JUMP_VELOCITY / 4
-		if Input.is_key_pressed(Key.KEY_E):
+		if Input.is_key_pressed(Key.KEY_R):
 			change_scenes("res://scenes/base.tscn")
 
 	# --- ROPE CONSTRAINT --- 

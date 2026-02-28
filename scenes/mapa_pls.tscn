@@ -2633,9 +2633,7 @@ texture_mode = 1
 [node name="CharacterBody2D" parent="." unique_id=614309881 instance=ExtResource("9_txjws")]
 position = Vector2(976, 356)
 script = ExtResource("10_127b4")
-speed = null
-rope_length = 1000.0
-money = null
+rope_length = 2000.0
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=1457011786]
 limit_left = -323
