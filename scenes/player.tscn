@@ -4,19 +4,31 @@
 [ext_resource type="Texture2D" uid="uid://c0rquuq8yyj7r" path="res://player imgs/ADAMEK.png" id="2_g2els"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
-radius = 20.0
+radius = 18.0
 height = 115.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g2els"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_g2els")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=614309881 groups=["player"]]
 script = ExtResource("1_g2els")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1958898317 groups=["player"]]
-position = Vector2(-0.9999981, -27.999989)
-scale = Vector2(0.08139535, 0.081117004)
-texture = ExtResource("2_g2els")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=862562871 groups=["player"]]
-position = Vector2(-1, -28)
+position = Vector2(-4, 19)
 shape = SubResource("CapsuleShape2D_g2els")
 
 [node name="Node2D" type="Node2D" parent="." unique_id=1636654684 groups=["player"]]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2082134256]
+position = Vector2(-5.000002, 17.62501)
+scale = Vector2(0.08720931, 0.08992689)
+sprite_frames = SubResource("SpriteFrames_g2els")
+animation = &"Idle"

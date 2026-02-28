@@ -124,7 +124,7 @@ texture = ExtResource("2_baglu")
 position = Vector2(980, 366)
 
 [node name="NiggAdam" parent="." unique_id=1636654684 instance=ExtResource("4_h5ip5")]
-position = Vector2(626, 492)
+position = Vector2(663, 427)
 rope_length = 500.0
 
 [node name="Island" type="StaticBody2D" parent="." unique_id=2020899278]
@@ -154,6 +154,8 @@ node_b = NodePath("../oxygen_tank")
 [node name="Line2D" type="Line2D" parent="PinJoint2D" unique_id=1473377462]
 texture_filter = 1
 texture_repeat = 2
+position = Vector2(3.818184, -2.4113474)
+scale = Vector2(0.8181818, 0.75886524)
 points = PackedVector2Array(1, 10, -11, 11, -22, 22, -33, 32, -44, 42, -55, 52, -66, 62, -77, 72, -88, 82, -100, 92, -111, 102, -123, 111, -124, 111)
 width = 20.0
 texture = ExtResource("12_dmaw2")
