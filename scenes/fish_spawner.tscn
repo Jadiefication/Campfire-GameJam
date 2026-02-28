@@ -27,6 +27,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_q8in3"]
+radius = 68.35203
+
 [node name="Area2D" type="Area2D" unique_id=570606193]
 script = ExtResource("1_auosd")
 attack_fish_dash = ExtResource("2_q8in3")
@@ -39,5 +42,10 @@ shape = SubResource("CircleShape2D_hb7eh")
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_m1qr2")
 animation = &"closed"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1870772279]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=207039267]
+shape = SubResource("CircleShape2D_q8in3")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

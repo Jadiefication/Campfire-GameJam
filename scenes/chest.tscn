@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://buxh6wc56mupk"]
 
+[ext_resource type="Script" uid="uid://d1mvf3yiqpfd4" path="res://scripts/chest.gd" id="1_gqd3d"]
 [ext_resource type="Texture2D" uid="uid://ce1bnvobvge41" path="res://IMGS/closed_chest.png" id="1_sy5e1"]
 [ext_resource type="Texture2D" uid="uid://6tgfuar16e5b" path="res://IMGS/open_chest.png" id="2_gqd3d"]
 
@@ -25,7 +26,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Area2D" type="Area2D" unique_id=1329740356]
+[node name="Chest" type="Area2D" unique_id=1329740356]
+script = ExtResource("1_gqd3d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=972433500]
 scale = Vector2(30, 30)
@@ -36,3 +38,5 @@ texture_filter = 1
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_yue2o")
 animation = &"closed"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
