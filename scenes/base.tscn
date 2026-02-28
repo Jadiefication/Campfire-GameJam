@@ -143,7 +143,7 @@ polygon = PackedVector2Array(458, 535, 349, 486, 423, 468, 471, 444, 487, 418, 5
 position = Vector2(749, 385)
 
 [node name="fish_spawner" parent="." unique_id=570606193 instance=ExtResource("7_hh5oj")]
-position = Vector2(235, 458)
+position = Vector2(88, 163)
 
 [node name="PinJoint2D" type="PinJoint2D" parent="." unique_id=1907018193]
 texture_filter = 1

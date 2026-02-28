@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://uwjvtq6hoewd" path="res://player imgs/ADAMEK2.0.png" id="2_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://l54r2a6op0ww" path="res://player imgs/image (1).png" id="3_dqkch"]
 [ext_resource type="Texture2D" uid="uid://dkf6i8hs861i2" path="res://player imgs/image.png" id="4_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://dd1yoykhgo7nd" path="res://player imgs/imageeeee.png" id="5_qlg0r"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
 radius = 18.0
@@ -23,6 +24,17 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
+"duration": 3.5,
+"texture": ExtResource("4_qlg0r")
+}, {
+"duration": 3.0,
+"texture": ExtResource("2_g2els")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_g2els")
 }],
@@ -35,7 +47,7 @@ animations = [{
 "texture": ExtResource("3_dqkch")
 }, {
 "duration": 2.0,
-"texture": ExtResource("4_qlg0r")
+"texture": ExtResource("5_qlg0r")
 }],
 "loop": true,
 "name": &"Walk",
@@ -48,10 +60,9 @@ animations = [{
 position = Vector2(-4, 19)
 shape = SubResource("CapsuleShape2D_g2els")
 
-[node name="Node2D" type="Node2D" parent="." unique_id=1636654684 groups=["player"]]
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2082134256]
 position = Vector2(-5.000002, 17.62501)
 scale = Vector2(0.08720931, 0.08992689)
 sprite_frames = SubResource("SpriteFrames_g2els")
-animation = &"Walk"
+animation = &"Jump"
+frame_progress = 0.51035786
