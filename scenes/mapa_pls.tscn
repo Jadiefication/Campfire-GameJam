@@ -15,7 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://0npph65pat50" path="res://sounds/ytmp3free.cc_submerged-ocean-ambient-music-underwater-sounds-youtubemp3free.org.mp3" id="8_myhk2"]
 [ext_resource type="PackedScene" uid="uid://c1v7a5htiqcsp" path="res://scenes/player.tscn" id="9_txjws"]
 [ext_resource type="Script" uid="uid://bnhodst1lsw4l" path="res://scripts/adam.gd" id="10_127b4"]
-[ext_resource type="Shader" uid="uid://e7igo45fo1by" path="res://shaders/ocean.gdshader" id="11_05jtr"]
+[ext_resource type="Shader" path="res://shaders/ocean.gdshader" id="11_05jtr"]
 [ext_resource type="PackedScene" uid="uid://bk8vlqanbro6t" path="res://scenes/oxygen_tank.tscn" id="12_wak0d"]
 [ext_resource type="Texture2D" uid="uid://bcmhr181vs24h" path="res://IMGS/pipe.png" id="13_emdhy"]
 [ext_resource type="Texture2D" uid="uid://dmuqlisthyhib" path="res://IMGS/ui/All.png" id="15_xg242"]
@@ -2545,6 +2545,8 @@ region = Rect2(1107, 37, 42, 7)
 font_size = 20
 font_color = Color(0, 0, 0, 1)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_xg242"]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5b7n5"]
 shader = ExtResource("11_05jtr")
 shader_parameter/tint_color = Vector3(0, 0.4, 0.7)
@@ -2704,6 +2706,9 @@ offset_top = -218.0
 offset_right = 340.0
 offset_bottom = -18.730042
 texture = ExtResource("2_7ykll")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1451621483]
+sprite_frames = SubResource("SpriteFrames_xg242")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=640104217]
 
