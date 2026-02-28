@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://clk0bo0tqe2fo"]
+
+[ext_resource type="Script" uid="uid://b1pww405bklrs" path="res://scripts/sound_attack.gd" id="1_0lnli"]
+[ext_resource type="Texture2D" uid="uid://c7lb4emwkdoa7" path="res://IMGS/soundwave_attack.png" id="1_d58pr"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0lnli"]
+radius = 20.0
+height = 86.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=258738282]
+script = ExtResource("1_0lnli")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=430609234]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_0lnli")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1763306009]
+texture_filter = 1
+scale = Vector2(5.5468745, 2.281251)
+texture = ExtResource("1_d58pr")
+
+[node name="Timer" type="Timer" parent="." unique_id=1964449417]
+wait_time = 2.0
+autostart = true
