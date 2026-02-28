@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" path="res://scenes/chest.tscn" id="2_x2awj"]
 [ext_resource type="PackedScene" path="res://scenes/fish_spawner.tscn" id="3_7ykll"]
 [ext_resource type="Texture2D" uid="uid://ddm5pblkn10ls" path="res://IMGS/ui/UI_Flat_Banner02a.png" id="6_x5sg4"]
+[ext_resource type="AudioStream" uid="uid://d2s0iq5xq5us8" path="res://sounds/ytmp3free.cc_beautiful-relaxing-music-underwater-tropical-fish-coral-reefs-sea-turtles-in-4k-by-tim-janis-youtubemp3free.org.mp3" id="7_jhl44"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y2eox"]
 texture = ExtResource("1_gol5h")
@@ -2363,3 +2364,7 @@ offset_top = 66.0
 offset_right = 915.0
 offset_bottom = 265.26996
 texture = ExtResource("2_7ykll")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=2067134431]
+stream = ExtResource("7_jhl44")
+autoplay = true
