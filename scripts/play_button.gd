@@ -4,12 +4,15 @@ extends Button
 @onready var logo = splash.get_node("SplashLogo")
 
 func _on_pressed() -> void:
+	get_parent().get_node("ButtonSound").play()
 	await transition_to_scene("res://scenes/base.tscn")
 
 func _on_credits_pressed() -> void:
+	get_parent().get_node("ButtonSound").play()
 	await transition_to_scene("res://scenes/credits.tscn")
 
 func _on_quit_pressed() -> void:
+	get_parent().get_node("ButtonSound").play()
 	get_tree().quit()
 	
 func transition_to_scene(scene_path: String) -> void:

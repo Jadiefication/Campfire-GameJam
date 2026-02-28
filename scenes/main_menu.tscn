@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://b65jlnyyqhccl" path="res://IMGS/title/credits.png" id="9_7b55j"]
 [ext_resource type="Texture2D" uid="uid://cjematp2n0u33" path="res://IMGS/title/quit.png" id="10_5pajh"]
 [ext_resource type="Texture2D" uid="uid://bf2hvdg5lmtd0" path="res://IMGS/icon.png" id="11_j7ex8"]
+[ext_resource type="AudioStream" uid="uid://crim4bo3kwb03" path="res://sounds/Voicy_ _Giggle_ Cute Anime Girl Sound Effect .mp3" id="13_rcqid"]
+[ext_resource type="AudioStream" uid="uid://bj41b7plalxsd" path="res://sounds/the-ringing-of-a-drop-from-the-cartoon.mp3" id="14_1ajci"]
 
 [sub_resource type="Shader" id="1"]
 code = "shader_type canvas_item;
@@ -179,6 +181,12 @@ offset_top = 183.0
 offset_right = 718.0
 offset_bottom = 454.0
 texture = ExtResource("11_j7ex8")
+
+[node name="SplashSound" type="AudioStreamPlayer2D" parent="." unique_id=1230152578]
+stream = ExtResource("13_rcqid")
+
+[node name="ButtonSound" type="AudioStreamPlayer2D" parent="." unique_id=1066155638]
+stream = ExtResource("14_1ajci")
 
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
 [connection signal="pressed" from="Button2" to="Button" method="_on_credits_pressed"]
