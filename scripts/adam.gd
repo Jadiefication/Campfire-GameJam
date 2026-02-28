@@ -14,19 +14,12 @@ const JUMP_VELOCITY: float = -600
 @onready var rope_line = get_parent().get_node("PinJoint2D/Line2D")
 @onready var hook = get_parent().get_node("oxygen_tank")
 
-var _money: int = 0
-
-@export var money: int = 0:
-	get:
-		return _money
-	set(value):
-		_money = value
-		change_money()
 # --- INTERNAL VARIABLES ---
 var rope_active: bool = false
 var hook_position: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
+	Global.money_changed.connect(change_money)
 	if hook:
 		hook_position = hook.global_position
 		rope_active = true
@@ -37,9 +30,7 @@ func _ready() -> void:
 	if get_parent().name == "World1":
 		GRAVITY /= 2
 	
-	change_money()
-	
-func change_money():
+func change_money(money):
 	if get_node_or_null("Camera2D") != null:
 		$Camera2D.get_node("Banner/Label").text = "$" + str(money)
 	else:
