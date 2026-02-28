@@ -14,6 +14,11 @@ const JUMP_VELOCITY: float = -600
 @onready var rope_line = get_parent().get_node("PinJoint2D/Line2D")
 @onready var hook = get_parent().get_node("oxygen_tank")
 
+@export var money: int = 0:
+	set(value):
+		money = value
+		change_money()
+
 # --- INTERNAL VARIABLES ---
 var rope_active: bool = false
 var hook_position: Vector2 = Vector2.ZERO
@@ -25,6 +30,10 @@ func _ready() -> void:
 
 	sprite.animation_finished.connect(_on_animation_finished)
 	sprite.play("Idle")
+	change_money()
+	
+func change_money():
+	get_parent().get_node("Banner/Label").text = "$" + str(money)
 
 func _physics_process(delta: float) -> void:
 	var direction = Input.get_axis("move_left", "move_right")
@@ -111,11 +120,11 @@ func on_enter_water(body: Node2D) -> void:
 		tween.tween_property(mat, "shader_parameter/transition_fill", 1.5, 0.6).set_trans(Tween.TRANS_SINE)
 		tween.tween_interval(1.0)
 		tween.tween_property(mat, "shader_parameter/transition_fill", 0.0, 0.6).set_trans(Tween.TRANS_SINE)
-		tween.tween_callback(func(): bubbles_node.visible = false)
-
-		var underwater_text = get_parent().get_node("Underwater_Text") as TextureRect
-		if underwater_text:
-			show_underwater_text(underwater_text)
+		
+		tween.tween_callback(func(): 
+				bubbles_node.visible = false
+				get_tree().change_scene_to_file("res://scenes/mapa_pls.tscn")
+		)
 
 func show_underwater_text(txt_rect: TextureRect) -> void:
 	txt_rect.modulate.a = 0.0
