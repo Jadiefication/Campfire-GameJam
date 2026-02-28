@@ -1,7 +1,9 @@
-[gd_scene format=3 uid="uid://652fn3xh6jt7"]
+[gd_scene format=3 uid="uid://c1v7a5htiqcsp"]
 
-[ext_resource type="Script" uid="uid://dcgqdrf0a2e8b" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://c0rquuq8yyj7r" path="res://player imgs/ADAMEK.png" id="2_g2els"]
+[ext_resource type="Texture2D" uid="uid://uwjvtq6hoewd" path="res://player imgs/ADAMEK2.0.png" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://l54r2a6op0ww" path="res://player imgs/image (1).png" id="3_dqkch"]
+[ext_resource type="Texture2D" uid="uid://dkf6i8hs861i2" path="res://player imgs/image.png" id="4_qlg0r"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
 radius = 18.0
@@ -10,16 +12,37 @@ height = 115.0
 [sub_resource type="SpriteFrames" id="SpriteFrames_g2els"]
 animations = [{
 "frames": [{
+"duration": 200.0,
+"texture": ExtResource("2_g2els")
+}, {
+"duration": 200.0,
+"texture": ExtResource("2_qhqgy")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 60.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_g2els")
 }],
 "loop": true,
-"name": &"Idle",
+"name": &"None",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("3_dqkch")
+}, {
+"duration": 2.0,
+"texture": ExtResource("4_qlg0r")
+}],
+"loop": true,
+"name": &"Walk",
 "speed": 5.0
 }]
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=614309881 groups=["player"]]
-script = ExtResource("1_g2els")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=862562871 groups=["player"]]
 position = Vector2(-4, 19)
@@ -31,4 +54,4 @@ shape = SubResource("CapsuleShape2D_g2els")
 position = Vector2(-5.000002, 17.62501)
 scale = Vector2(0.08720931, 0.08992689)
 sprite_frames = SubResource("SpriteFrames_g2els")
-animation = &"Idle"
+animation = &"Walk"
