@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://6tgfuar16e5b" path="res://IMGS/open_chest.png" id="2_gqd3d"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sy5e1"]
-radius = 7.1340346
+radius = 6.366667
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yue2o"]
 animations = [{
@@ -35,8 +35,18 @@ shape = SubResource("CircleShape2D_sy5e1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1844558327]
 texture_filter = 1
-scale = Vector2(5, 5)
+scale = Vector2(4.3125, 4.125)
 sprite_frames = SubResource("SpriteFrames_yue2o")
 animation = &"closed"
 
+[node name="Label" type="Label" parent="." unique_id=1161149135]
+offset_left = -136.0
+offset_top = -128.0
+offset_right = 47.0
+offset_bottom = -51.0
+text = "Press E to open chest"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
