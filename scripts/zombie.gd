@@ -7,7 +7,7 @@ var is_active = true
 func _ready():
 	# Pre-fetch the player so we don't have to call get_first_node every frame
 	player = get_tree().get_first_node_in_group("player")
-	print("Enemy initialized")
+	is_active = false
 
 func _physics_process(_delta):
 	if not is_active:
@@ -33,3 +33,15 @@ func wait_after_hit():
 	velocity = Vector2.ZERO
 	await get_tree().create_timer(0.5).timeout
 	is_active = true
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		player = body
+		print("Enemy initialized")
+		is_active = true
+
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		is_active = false

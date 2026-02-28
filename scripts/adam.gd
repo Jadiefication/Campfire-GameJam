@@ -22,6 +22,8 @@ var hp_current = 100
 var rope_active: bool = false
 var hook_position: Vector2 = Vector2.ZERO
 
+var is_underwater: bool = false
+
 func _ready() -> void:
 	Global.money_changed.connect(change_money)
 	if hook:
@@ -31,6 +33,12 @@ func _ready() -> void:
 	sprite.animation_finished.connect(_on_animation_finished)
 	sprite.play("Idle")
 	
+	var current := get_tree().current_scene
+	if current and current.scene_file_path == "res://scenes/mapa_pls.tscn":
+		is_underwater = true
+	else:
+		is_underwater = false
+		
 	if get_parent().name == "World1":
 		GRAVITY /= 2
 		speed /= 2
@@ -49,10 +57,14 @@ func _physics_process(delta: float) -> void:
 		hook_position = hook.global_position
 
 	# --- GRAVITY ---
-	if not is_on_floor():
-		velocity.y += GRAVITY * delta
+	if not is_underwater:
+		if not is_on_floor():
+			velocity.y += GRAVITY * delta
+		else:
+			velocity.y = 0
 	else:
-		velocity.y = 0
+		# optional: damp vertical drift underwater
+		velocity.y = lerp(velocity.y, 0.0, 0.05)
 		
 	if Input.is_key_pressed(Key.KEY_ESCAPE):
 		change_scenes("res://scenes/main_menu.tscn")

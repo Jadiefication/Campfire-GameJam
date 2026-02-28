@@ -31,12 +31,12 @@ animations = [{
 radius = 68.35203
 
 [node name="Area2D" type="Area2D" unique_id=570606193]
-collision_layer = 2
+collision_layer = 6
 script = ExtResource("1_auosd")
 attack_fish_dash = ExtResource("2_q8in3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=826868665]
-scale = Vector2(30, 30)
+scale = Vector2(10, 10)
 shape = SubResource("CircleShape2D_hb7eh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=444895687]
