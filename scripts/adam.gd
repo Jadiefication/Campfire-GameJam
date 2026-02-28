@@ -95,6 +95,7 @@ func on_enter_water(body: Node2D) -> void:
 	if body == self and bubbles_node:
 		bubbles_node.visible = true
 		var mat = bubbles_node.get_node("ColorRect").material
+		get_parent().get_node("BubbleSFX").play()
 		var tween = create_tween()
 		
 		# Bubble splash in
