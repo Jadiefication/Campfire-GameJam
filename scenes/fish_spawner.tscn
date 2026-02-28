@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dxe8a5xj541o0" path="res://open_gate(1).png" id="4_w3feb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hb7eh"]
-radius = 11.632331
+radius = 19.776812
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_m1qr2"]
 animations = [{

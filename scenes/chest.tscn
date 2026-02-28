@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://buxh6wc56mupk"]
+
+[ext_resource type="Texture2D" uid="uid://ce1bnvobvge41" path="res://IMGS/closed_chest.png" id="1_sy5e1"]
+[ext_resource type="Texture2D" uid="uid://6tgfuar16e5b" path="res://IMGS/open_chest.png" id="2_gqd3d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sy5e1"]
+radius = 7.1340346
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yue2o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_sy5e1")
+}],
+"loop": true,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gqd3d")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}]
+
+[node name="Area2D" type="Area2D" unique_id=1329740356]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=972433500]
+scale = Vector2(30, 30)
+shape = SubResource("CircleShape2D_sy5e1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1844558327]
+texture_filter = 1
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_yue2o")
+animation = &"closed"
