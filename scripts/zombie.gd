@@ -51,6 +51,7 @@ func _physics_process(delta):
 		if collider and collider.is_in_group("player"):
 			# damage and short stun
 			Global.hp -= 10
+			$AudioStreamPlayer2D.play()
 			wait_after_hit()
 			break
 

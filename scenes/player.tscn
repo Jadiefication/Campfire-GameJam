@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://l54r2a6op0ww" path="res://player imgs/image (1).png" id="3_dqkch"]
 [ext_resource type="Texture2D" uid="uid://dkf6i8hs861i2" path="res://player imgs/image.png" id="4_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://dd1yoykhgo7nd" path="res://player imgs/imageeeee.png" id="5_qlg0r"]
+[ext_resource type="AudioStream" uid="uid://hcc0g0nj8way" path="res://sounds/the-sound-of-the-last-bubbles-that-come-out-of-a-person39s-lungs-underwater.mp3" id="6_tuyoq"]
+[ext_resource type="AudioStream" uid="uid://0s3vw3v27kpw" path="res://sounds/freesound_community-walking-on-gravel-38827.mp3" id="7_fjrip"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
 radius = 18.0
@@ -74,3 +76,9 @@ offset_left = -49.0
 offset_top = -82.0
 offset_right = 49.77777
 offset_bottom = -54.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1151727252]
+stream = ExtResource("6_tuyoq")
+
+[node name="SandWalk" type="AudioStreamPlayer2D" parent="." unique_id=1638870041]
+stream = ExtResource("7_fjrip")

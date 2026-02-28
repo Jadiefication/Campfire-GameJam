@@ -41,6 +41,7 @@ func change_hp(new_hp: int):
 	new_hp = clamp(new_hp, 0, 100)
 	
 	if new_hp == 0:
+		$AudioStreamPlayer2D.play()
 		change_scenes("res://scenes/main_menu.tscn")
 	
 	# Each texture covers an equal range
@@ -101,6 +102,8 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction * speed
 		if sprite.animation != "Walk":
 			sprite.play("Walk")
+			if is_on_floor():
+				$SandWalk.play()
 		sprite.flip_h = direction < 0
 	else:
 		velocity.x = lerp(velocity.x, 0.0, 0.1)
