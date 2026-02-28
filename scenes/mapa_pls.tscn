@@ -18,6 +18,7 @@
 [ext_resource type="Shader" uid="uid://e7igo45fo1by" path="res://shaders/ocean.gdshader" id="11_05jtr"]
 [ext_resource type="PackedScene" uid="uid://bk8vlqanbro6t" path="res://scenes/oxygen_tank.tscn" id="12_wak0d"]
 [ext_resource type="Texture2D" uid="uid://bcmhr181vs24h" path="res://IMGS/pipe.png" id="13_emdhy"]
+[ext_resource type="Texture2D" uid="uid://dmuqlisthyhib" path="res://IMGS/ui/All.png" id="15_xg242"]
 [ext_resource type="AudioStream" uid="uid://d0qn18na686an" path="res://sounds/bubbles.mp3" id="19_ogfxj"]
 
 [sub_resource type="Shader" id="1"]
@@ -2503,6 +2504,42 @@ tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 2
 sources/0 = SubResource("TileSetAtlasSource_y2eox")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvx7h"]
+atlas = ExtResource("15_xg242")
+region = Rect2(915, 21, 42, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8p7sb"]
+atlas = ExtResource("15_xg242")
+region = Rect2(915, 37, 42, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_73413"]
+atlas = ExtResource("15_xg242")
+region = Rect2(963, 21, 42, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bleqs"]
+atlas = ExtResource("15_xg242")
+region = Rect2(963, 37, 42, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6xfuw"]
+atlas = ExtResource("15_xg242")
+region = Rect2(1011, 21, 42, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yop7p"]
+atlas = ExtResource("15_xg242")
+region = Rect2(1011, 37, 42, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lvqyh"]
+atlas = ExtResource("15_xg242")
+region = Rect2(1060, 21, 41, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5acj2"]
+atlas = ExtResource("15_xg242")
+region = Rect2(1059, 37, 42, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g4ixy"]
+atlas = ExtResource("15_xg242")
+region = Rect2(1107, 37, 42, 7)
+
 [sub_resource type="LabelSettings" id="LabelSettings_jhl44"]
 font_size = 20
 font_color = Color(0, 0, 0, 1)
@@ -2634,6 +2671,7 @@ texture_mode = 1
 position = Vector2(976, 356)
 script = ExtResource("10_127b4")
 rope_length = 2000.0
+hp = Array[AtlasTexture]([SubResource("AtlasTexture_vvx7h"), SubResource("AtlasTexture_8p7sb"), SubResource("AtlasTexture_73413"), SubResource("AtlasTexture_bleqs"), SubResource("AtlasTexture_6xfuw"), SubResource("AtlasTexture_yop7p"), SubResource("AtlasTexture_lvqyh"), SubResource("AtlasTexture_5acj2"), SubResource("AtlasTexture_g4ixy")])
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=1457011786]
 limit_left = -323

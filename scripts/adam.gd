@@ -4,9 +4,13 @@ extends CharacterBody2D
 @export var speed: float = 200.0
 @export var rope_length: float = 500.0
 
+@export var hp: Array[AtlasTexture]
+
 # --- CONSTANTS ---
 var GRAVITY: float = 1200.0
 const JUMP_VELOCITY: float = -600
+
+var hp_current = 100
 
 # --- NODE REFERENCES ---
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D

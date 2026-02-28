@@ -67,3 +67,9 @@ scale = Vector2(0.08720931, 0.08992689)
 sprite_frames = SubResource("SpriteFrames_g2els")
 animation = &"Jump"
 frame_progress = 0.51035786
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=827045815]
+offset_left = -25.0
+offset_top = -81.0
+offset_right = 11.0
+offset_bottom = -45.0
