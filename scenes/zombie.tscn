@@ -7,6 +7,8 @@
 radius = 254.99997
 height = 769.99994
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_httt1"]
+
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1747079483]
 scale = Vector2(0.2, 0.2)
 collision_layer = 4
@@ -18,3 +20,9 @@ shape = SubResource("CapsuleShape2D_httt1")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=675527383]
 texture = ExtResource("1_1vlb3")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=307964370]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2066194455]
+scale = Vector2(400, 400)
+shape = SubResource("CircleShape2D_httt1")
