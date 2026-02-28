@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://ctrq7q5baat5u"]
 
 [ext_resource type="Texture2D" uid="uid://swnmyifx7lkq" path="res://IMGS/tilemap1.png" id="1_gol5h"]
-[ext_resource type="Script" path="res://scripts/mapa_pls.gd" id="1_x2awj"]
+[ext_resource type="Script" uid="uid://blddvgw34dbsq" path="res://scripts/mapa_pls.gd" id="1_x2awj"]
 [ext_resource type="Texture2D" uid="uid://bnnqc3a1e87xw" path="res://textpng.png" id="2_7ykll"]
 [ext_resource type="PackedScene" uid="uid://buxh6wc56mupk" path="res://scenes/chest.tscn" id="2_x2awj"]
 [ext_resource type="PackedScene" uid="uid://qiulhnrb1h2f" path="res://scenes/fish_spawner.tscn" id="3_7ykll"]
-[ext_resource type="PackedScene" uid="uid://dvm61g86m55o7" path="res://scenes/zombie.tscn" id="6_x5sg4"]
 [ext_resource type="Texture2D" uid="uid://ddm5pblkn10ls" path="res://IMGS/ui/UI_Flat_Banner02a.png" id="6_x5sg4"]
 [ext_resource type="AudioStream" uid="uid://d2s0iq5xq5us8" path="res://sounds/ytmp3free.cc_beautiful-relaxing-music-underwater-tropical-fish-coral-reefs-sea-turtles-in-4k-by-tim-janis-youtubemp3free.org.mp3" id="7_jhl44"]
+[ext_resource type="PackedScene" uid="uid://dvm61g86m55o7" path="res://scenes/zombie.tscn" id="7_myhk2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y2eox"]
 texture = ExtResource("1_gol5h")
@@ -2372,16 +2372,16 @@ texture = ExtResource("2_7ykll")
 [node name="Area2D2" parent="." unique_id=130372644 instance=ExtResource("3_7ykll")]
 position = Vector2(185, 1084)
 
-[node name="CharacterBody2D" parent="Area2D2" unique_id=1747079483 instance=ExtResource("6_x5sg4")]
-position = Vector2(1033, -582.00006)
+[node name="CharacterBody2D2" parent="Area2D2" unique_id=1747079483 instance=ExtResource("7_myhk2")]
+position = Vector2(523.99994, -818)
 
-[node name="CharacterBody2D2" parent="." unique_id=1988029461 instance=ExtResource("6_x5sg4")]
-position = Vector2(1254, 1258)
+[node name="CharacterBody2D3" parent="." unique_id=893069550 instance=ExtResource("7_myhk2")]
+position = Vector2(1458.9999, 523.99994)
 
-[node name="CharacterBody2D" parent="." unique_id=1308576428 instance=ExtResource("6_x5sg4")]
-position = Vector2(610, 1037)
-scale = Vector2(-0.2, 0.2)
+[node name="CharacterBody2D2" parent="." unique_id=1383476667 instance=ExtResource("7_myhk2")]
+position = Vector2(631.99994, 949.99994)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=2067134431]
+position = Vector2(0, 57)
 stream = ExtResource("7_jhl44")
 autoplay = true
