@@ -41,7 +41,7 @@ text = "press e to interact
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=279044118]
 
 [node name="ItemList" type="ItemList" parent="CanvasLayer" unique_id=279044117]
-visible = false
+texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

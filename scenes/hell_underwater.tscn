@@ -1,6 +1,7 @@
-[gd_scene format=4 uid="uid://tjxi0e3wajfg"]
+[gd_scene format=4 uid="uid://drxpx1cigs2mq"]
 
 [ext_resource type="Texture2D" uid="uid://1k1bxllxwl6" path="res://IMGS/firebg.jpeg" id="1_esnyg"]
+[ext_resource type="Script" uid="uid://ulii4uxvskt8" path="res://scripts/hell_underwater.gd" id="1_fer80"]
 [ext_resource type="Texture2D" uid="uid://j16rl44dpmsb" path="res://IMGS/hell_underwater_cropped_buildings.png" id="1_frprk"]
 [ext_resource type="PackedScene" uid="uid://eoyrkfeb6fl4" path="res://scenes/bubble_shader.tscn" id="1_uqt7h"]
 [ext_resource type="Texture2D" uid="uid://butnaqgcykb3b" path="res://IMGS/hell_underwater_blocks.jpg" id="2_6k6qp"]
@@ -13,15 +14,16 @@
 [ext_resource type="Texture2D" uid="uid://dmuqlisthyhib" path="res://IMGS/ui/All.png" id="8_esnyg"]
 [ext_resource type="Texture2D" uid="uid://ddm5pblkn10ls" path="res://IMGS/ui/UI_Flat_Banner02a.png" id="9_ljmh0"]
 [ext_resource type="Script" uid="uid://dsilfi0q220ec" path="res://scripts/banner.gd" id="10_banner"]
-[ext_resource type="Texture2D" uid="uid://bnnqc3a1e87xw" path="res://textpng.png" id="10_t8bxo"]
-[ext_resource type="Shader" path="res://shaders/hell.gdshader" id="11_dlrvt"]
+[ext_resource type="Shader" uid="uid://6vfs4o4qrspc" path="res://shaders/hell.gdshader" id="11_dlrvt"]
 [ext_resource type="AudioStream" uid="uid://d0qn18na686an" path="res://sounds/bubbles.mp3" id="15_e6enc"]
+[ext_resource type="Texture2D" uid="uid://d21auhre8tnae" path="res://IMGS/lava_title.png" id="15_fer80"]
 [ext_resource type="PackedScene" uid="uid://bk8vlqanbro6t" path="res://scenes/oxygen_tank.tscn" id="16_3h0yo"]
-[ext_resource type="PackedScene" uid="uid://bf8n3nmp4jlgd" path="res://scenes/placid.tscn" id="17_e6enc"]
-[ext_resource type="PackedScene" uid="uid://dq2nteehp5hlu" path="res://scenes/ishin.tscn" id="18_3h0yo"]
-[ext_resource type="PackedScene" uid="uid://bkjcp4r0anglr" path="res://scenes/gold_chest.tscn" id="19_1rheg"]
-[ext_resource type="PackedScene" uid="uid://pfws4mbqde5j" path="res://scenes/ultimate_chest.tscn" id="20_1ocxh"]
-[ext_resource type="PackedScene" uid="uid://dvy1ymmd68kn" path="res://scenes/siren.tscn" id="21_ktryu"]
+[ext_resource type="PackedScene" path="res://scenes/placid.tscn" id="17_e6enc"]
+[ext_resource type="PackedScene" path="res://scenes/ishin.tscn" id="18_3h0yo"]
+[ext_resource type="PackedScene" path="res://scenes/gold_chest.tscn" id="19_1rheg"]
+[ext_resource type="PackedScene" path="res://scenes/ultimate_chest.tscn" id="20_1ocxh"]
+[ext_resource type="PackedScene" path="res://scenes/siren.tscn" id="21_ktryu"]
+[ext_resource type="AudioStream" uid="uid://cunhf1gri0oy0" path="res://sounds/ytmp3free.cc_volcano-lava-4k-scenic-relaxation-film-with-calming-music-youtubemp3free.org.mp3" id="24_wdbx7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7eldv"]
 texture = ExtResource("1_frprk")
@@ -326,6 +328,9 @@ physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_7eldv")
 sources/1 = SubResource("TileSetAtlasSource_1mgc0")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uqt7h"]
+size = Vector2(2090, 498)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_vvx7h"]
 atlas = ExtResource("8_esnyg")
 region = Rect2(915, 21, 42, 7)
@@ -368,15 +373,14 @@ font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uqt7h"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uqt7h"]
-size = Vector2(2090, 498)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_esnyg"]
 shader = ExtResource("11_dlrvt")
-shader_parameter/red_intensity = 0.6
+shader_parameter/tint_color = Color(0.92, 0.25, 0.25, 1)
+shader_parameter/tint_intensity = 0.5
 shader_parameter/distortion_strength = 2.0
 
 [node name="World2" type="Node2D" unique_id=889555984]
+script = ExtResource("1_fer80")
 
 [node name="Bubbles" parent="." unique_id=1744166050 instance=ExtResource("1_uqt7h")]
 visible = false
@@ -441,24 +445,31 @@ texture_filter = 1
 texture_repeat = 2
 position = Vector2(262.99997, -393)
 scale = Vector2(0.7452624, 0.6524824)
-points = PackedVector2Array(-103.319336, -144.06519, -73.79956, 10.728259, -72.45776, 26.054342, -67.090454, 32.184776, -61.723267, 42.913036, -55, 52, -66, 62, -77, 72, -91.24298, 76.63043, -103.319275, 81.22827, -101.97754, 98.08694, -104.66113, 119.54345, -104.66113, 137.93475)
+points = PackedVector2Array(-103.319336, -144.06519, -73.79956, 10.728259, -72.45776, 26.054342, -67.090454, 32.184776, -61.723267, 42.913036, -55, 52, -66, 62, -77, 72, -91.24298, 76.63043, -103.319275, 81.22827, -101.97754, 98.08694, -104.66113, 119.54345, -104.66113, 245.21735)
 width = 20.0
 texture = ExtResource("8_8cqw2")
 texture_mode = 1
 
-[node name="CharacterBody2D4" parent="." unique_id=614309881 instance=ExtResource("6_ahgj8")]
-position = Vector2(937, 105)
+[node name="Area2D13" type="Area2D" parent="." unique_id=676467604]
+position = Vector2(1064, 1633)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D13" unique_id=1360735748]
+position = Vector2(-127, -1841)
+shape = SubResource("RectangleShape2D_uqt7h")
+
+[node name="Player" parent="." unique_id=614309881 instance=ExtResource("6_ahgj8")]
+position = Vector2(940, 140)
 collision_mask = 6
 script = ExtResource("7_dlrvt")
 hp = Array[AtlasTexture]([SubResource("AtlasTexture_vvx7h"), SubResource("AtlasTexture_8p7sb"), SubResource("AtlasTexture_73413"), SubResource("AtlasTexture_bleqs"), SubResource("AtlasTexture_6xfuw"), SubResource("AtlasTexture_yop7p"), SubResource("AtlasTexture_lvqyh"), SubResource("AtlasTexture_5acj2"), SubResource("AtlasTexture_g4ixy")])
 
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D4" unique_id=201719569]
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=201719569]
 limit_left = -2728
 limit_top = 0
 limit_smoothed = true
 position_smoothing_enabled = true
 
-[node name="Banner" type="TextureRect" parent="CharacterBody2D4/Camera2D" unique_id=439498762]
+[node name="Banner" type="TextureRect" parent="Player/Camera2D" unique_id=439498762]
 texture_filter = 1
 offset_left = -562.0
 offset_top = -304.0
@@ -468,7 +479,7 @@ texture = ExtResource("9_ljmh0")
 expand_mode = 3
 script = ExtResource("10_banner")
 
-[node name="Label" type="Label" parent="CharacterBody2D4/Camera2D/Banner" unique_id=1358029298]
+[node name="Label" type="Label" parent="Player/Camera2D/Banner" unique_id=1358029298]
 texture_filter = 1
 layout_mode = 0
 offset_left = 143.0
@@ -478,7 +489,7 @@ offset_bottom = 35.0
 text = "0$"
 label_settings = SubResource("LabelSettings_otsws")
 
-[node name="TimerLabel" type="Label" parent="CharacterBody2D4/Camera2D/Banner"]
+[node name="TimerLabel" type="Label" parent="Player/Camera2D/Banner" unique_id=868427152]
 texture_filter = 1
 layout_mode = 0
 offset_left = 44.0
@@ -488,33 +499,26 @@ offset_bottom = 35.0
 text = "10:00"
 label_settings = SubResource("LabelSettings_otsws")
 
-[node name="Underwater_Text" type="TextureRect" parent="CharacterBody2D4/Camera2D" unique_id=2039603212]
+[node name="Underwater_Text" type="TextureRect" parent="Player/Camera2D" unique_id=2039603212]
 visible = false
 texture_filter = 1
-offset_left = -336.0
-offset_top = -218.0
-offset_right = 340.0
-offset_bottom = -18.730042
-texture = ExtResource("10_t8bxo")
+offset_left = -357.0
+offset_top = -134.0
+offset_right = 319.0
+offset_bottom = 65.26996
+texture = ExtResource("15_fer80")
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="CharacterBody2D4" unique_id=1822228458]
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Player" unique_id=1822228458]
 sprite_frames = SubResource("SpriteFrames_uqt7h")
-
-[node name="Area2D3" type="Area2D" parent="CharacterBody2D4" unique_id=676467604]
-position = Vector2(127, 1528)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D4/Area2D3" unique_id=1360735748]
-position = Vector2(-129, -1824)
-shape = SubResource("RectangleShape2D_uqt7h")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=409560399]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1467106934]
 material = SubResource("ShaderMaterial_esnyg")
-offset_left = -5468.0
-offset_top = -68.0
-offset_right = 7009.0
-offset_bottom = 8685.0
+offset_left = -5495.0
+offset_top = -56.0
+offset_right = 6982.0
+offset_bottom = 8697.0
 
 [node name="BackBufferCopy" type="BackBufferCopy" parent="CanvasLayer" unique_id=709646085]
 
@@ -572,4 +576,7 @@ position = Vector2(341, 3984)
 [node name="CharacterBody2D5" parent="." unique_id=33838428 instance=ExtResource("21_ktryu")]
 position = Vector2(256, 2258)
 
-[connection signal="body_entered" from="CharacterBody2D4/Area2D3" to="CharacterBody2D4" method="go_back"]
+[node name="Music" type="AudioStreamPlayer2D" parent="." unique_id=1696926604]
+stream = ExtResource("24_wdbx7")
+
+[connection signal="body_entered" from="Area2D13" to="Player" method="go_back"]

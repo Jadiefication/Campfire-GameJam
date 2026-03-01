@@ -18,6 +18,7 @@ func _ready():
 	$Backgg.modulate.a = 0.0
 	$Timer.timeout.connect(_on_timer_timeout)
 	get_tree().about_to_quit.connect(Global.save_run)
+	$Music.play()
 
 func _on_timer_timeout():
 	# move to the next image in order
