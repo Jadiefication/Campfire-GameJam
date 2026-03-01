@@ -1,12 +1,17 @@
 [gd_scene format=3 uid="uid://c1v7a5htiqcsp"]
 
+[ext_resource type="Texture2D" uid="uid://dgn53vvg44wl5" path="res://player imgs/ADAMEK WITH HELMET.png" id="1_3v2ag"]
 [ext_resource type="Texture2D" uid="uid://c0rquuq8yyj7r" path="res://player imgs/ADAMEK.png" id="2_g2els"]
 [ext_resource type="Texture2D" uid="uid://uwjvtq6hoewd" path="res://player imgs/ADAMEK2.0.png" id="2_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://l54r2a6op0ww" path="res://player imgs/image (1).png" id="3_dqkch"]
 [ext_resource type="Texture2D" uid="uid://dkf6i8hs861i2" path="res://player imgs/image.png" id="4_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://2ep4701pv6e3" path="res://player imgs/swiming.png" id="5_jej6c"]
 [ext_resource type="Texture2D" uid="uid://dd1yoykhgo7nd" path="res://player imgs/imageeeee.png" id="5_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://cuk5j634yoeyu" path="res://player imgs/rucicki.png" id="6_f1ej7"]
 [ext_resource type="AudioStream" uid="uid://hcc0g0nj8way" path="res://sounds/the-sound-of-the-last-bubbles-that-come-out-of-a-person39s-lungs-underwater.mp3" id="6_tuyoq"]
 [ext_resource type="AudioStream" uid="uid://0s3vw3v27kpw" path="res://sounds/freesound_community-walking-on-gravel-38827.mp3" id="7_fjrip"]
+[ext_resource type="Texture2D" uid="uid://bw47xeu5kldri" path="res://player imgs/BEZII.png" id="9_oprun"]
+[ext_resource type="Texture2D" uid="uid://dnowvgb6hjppv" path="res://player imgs/BEZII2.png" id="10_a8ls1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
 radius = 18.0
@@ -14,6 +19,14 @@ height = 115.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g2els"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_3v2ag")
+}],
+"loop": true,
+"name": &"Helmet",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 200.0,
 "texture": ExtResource("2_g2els")
@@ -46,6 +59,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 2.0,
+"texture": ExtResource("5_jej6c")
+}, {
+"duration": 2.0,
+"texture": ExtResource("6_f1ej7")
+}],
+"loop": true,
+"name": &"Swim",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
 "texture": ExtResource("3_dqkch")
 }, {
 "duration": 2.0,
@@ -53,6 +77,17 @@ animations = [{
 }],
 "loop": true,
 "name": &"Walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("9_oprun")
+}, {
+"duration": 2.0,
+"texture": ExtResource("10_a8ls1")
+}],
+"loop": true,
+"name": &"Walk_Helmet",
 "speed": 5.0
 }]
 
@@ -67,8 +102,9 @@ shape = SubResource("CapsuleShape2D_g2els")
 position = Vector2(-5.000002, 17.62501)
 scale = Vector2(0.08720931, 0.08992689)
 sprite_frames = SubResource("SpriteFrames_g2els")
-animation = &"Jump"
-frame_progress = 0.51035786
+animation = &"Swim"
+frame = 1
+frame_progress = 0.59443736
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=827045815]
 texture_filter = 1
