@@ -1,6 +1,7 @@
 extends Node2D
 
 func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	var underwater_text = $CharacterBody2D/Camera2D/Underwater_Text as TextureRect
 	if underwater_text:
 		show_underwater_text(underwater_text)

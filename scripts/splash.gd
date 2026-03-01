@@ -23,6 +23,7 @@ func load_leaderboard() -> Array:
 	return []
 
 func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	# --- Splash Sequence ---
 	splash_sound.play()
 	await get_tree().create_timer(1.5).timeout
