@@ -6,7 +6,7 @@ var money: int = 0:
 	set(value):
 		money = value
 		if value > 0:
-			total_money = value
+			total_money += value
 		money_changed.emit(money)
 		
 signal hp_changed(new_amount)
