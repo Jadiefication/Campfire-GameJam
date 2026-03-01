@@ -13,3 +13,10 @@ var hp: int = 100:
 	set(value):
 		hp = value
 		hp_changed.emit(value)
+
+signal max_hp_changed(new_amount)
+
+var max_hp: int = 100:
+	set(value):
+		max_hp = value
+		max_hp_changed.emit(value)

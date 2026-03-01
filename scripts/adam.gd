@@ -10,7 +10,8 @@ extends CharacterBody2D
 var GRAVITY: float = 1200.0
 const JUMP_VELOCITY: float = -600
 
-var hp_current = 100
+var hp_current: int = 100
+var current_max_hp: int = 100
 
 # --- NODE REFERENCES ---
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -23,8 +24,10 @@ var rope_active: bool = false
 var hook_position: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
+	current_max_hp = Global.max_hp
 	Global.money_changed.connect(change_money)
 	Global.hp_changed.connect(change_hp)
+	Global.max_hp_changed.connect(change_max_hp)
 	if hook:
 		hook_position = hook.global_position
 		rope_active = true
@@ -36,23 +39,39 @@ func _ready() -> void:
 		GRAVITY /= 2
 		speed /= 2
 		Global.hp = 100
-		
+
 func change_hp(new_hp: int):
-	new_hp = clamp(new_hp, 0, 100)
+	new_hp = clamp(new_hp, 0, current_max_hp)
 	
 	if new_hp == 0:
 		$AudioStreamPlayer2D.play()
 		change_scenes("res://scenes/main_menu.tscn")
 	
+	if hp.size() == 0:
+		return
+		
 	# Each texture covers an equal range
-	var range_size: float = 100.0 / hp.size()
-	var index: int = int(floor((100 - new_hp) / range_size))
+	var range_size: float = float(current_max_hp) / hp.size()
+	if range_size <= 0: range_size = 1.0
+	
+	var index: int = int(floor((current_max_hp - new_hp) / range_size))
 	
 	# Make sure index stays within bounds
 	index = clamp(index, 0, hp.size() - 1)
 	
 	$TextureRect.texture = hp[index]
+func change_max_hp(new_max_hp: int):
+	var old_max = current_max_hp
+	if old_max == 0: old_max = 100 
 	
+	# Increase the hp you currently have by the extra amount you gained, not by percentage
+	var gain = new_max_hp - old_max
+	var new_hp = Global.hp + gain
+	
+	current_max_hp = new_max_hp
+	Global.hp = new_hp
+	
+		
 func change_money(money):
 	if get_node_or_null("Camera2D") != null:
 		$Camera2D.get_node("Banner/Label").text = "$" + str(money)
