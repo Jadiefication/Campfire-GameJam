@@ -29,6 +29,7 @@ func _ready() -> void:
 	Global.hp_changed.connect(change_hp)
 	Global.max_hp_changed.connect(change_max_hp)
 	Global.rope_length_changed.connect(change_rope_length)
+	Global.speed_changed.connect(change_speed)
 	rope_length_org = Global.rope_length
 	rope_length_2 = rope_length_org - 1600
 	if hook:
@@ -43,7 +44,15 @@ func _ready() -> void:
 	
 	if get_parent().name == "World1":
 		GRAVITY /= 2
-		speed /= 2
+		speed = Global.speed / 2
+	else:
+		speed = Global.speed
+
+func change_speed(new_speed: float):
+	if get_parent().name == "World1":
+		speed = new_speed / 2
+	else:
+		speed = new_speed
 
 func change_hp(new_hp: int):
 	new_hp = clamp(new_hp, 0, current_max_hp)

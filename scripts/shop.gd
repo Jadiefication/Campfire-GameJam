@@ -15,16 +15,21 @@ func _ready() -> void:
 	shop_items.set_item_text(0, "HP - $" + str(Global.hp_upgrade_cost))
 	shop_items.set_item_text(1, "Pipe range - $" + str(Global.pipe_upgrade_cost))
 	shop_items.set_item_text(2, "Heal - $" + str(heal_cost))
+	shop_items.set_item_text(3, "Speed - $" + str(Global.speed_upgrade_cost))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if player_is_in_area and Input.is_action_just_pressed("Interact") and !is_shopping:
-		# Center the shop items in the player's view
-		shop_items.visible = true
-		is_shopping = true
-	elif player_is_in_area and Input.is_action_just_pressed("Interact") and is_shopping:
-		shop_items.visible = false
-		is_shopping = false
+	if player_is_in_area and Input.is_action_just_pressed("Interact"):
+		if !is_shopping:
+			# Open the shop
+			shop_items.visible = true
+			is_shopping = true
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		else:
+			# Close the shop
+			shop_items.visible = false
+			is_shopping = false
+			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN) # Or MOUSE_MODE_CAPTURED if the game needs it
 	
 	# Since ItemList is now in a CanvasLayer and has anchors_preset = 8 (Center),
 	# it will be automatically centered on the screen by Godot.
@@ -42,6 +47,10 @@ func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		popup.visible = false
 		player_is_in_area = false
+		if is_shopping:
+			shop_items.visible = false
+			is_shopping = false
+			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 
 func _on_item_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
@@ -75,6 +84,17 @@ func _on_item_list_item_clicked(index: int, at_position: Vector2, mouse_button_i
 				print("Healed to max!")
 			else:
 				print("Already at full health!")
+		else:
+			print("Not enough money!")
+	elif index == 3:
+		if Global.money >= Global.speed_upgrade_cost:
+			Global.money -= Global.speed_upgrade_cost
+			Global.speed += 50
+			# Increase the cost for the next upgrade
+			Global.speed_upgrade_cost += 500
+			# Update the UI text
+			shop_items.set_item_text(3, "Speed - $" + str(Global.speed_upgrade_cost))
+			print(Global.speed)
 		else:
 			print("Not enough money!")
 	
