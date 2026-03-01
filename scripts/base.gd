@@ -13,6 +13,7 @@ var index := 0
 var showing_a := true  # which TextureRect is currently visible
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	$Background.texture = backgrounds[index]
 	$Background.modulate.a = 1.0
 	$Backgg.modulate.a = 0.0
