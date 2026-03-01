@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://drxpx1cigs2mq"]
+[gd_scene format=4 uid="uid://tjxi0e3wajfg"]
 
 [ext_resource type="Texture2D" uid="uid://1k1bxllxwl6" path="res://IMGS/firebg.jpeg" id="1_esnyg"]
 [ext_resource type="Texture2D" uid="uid://j16rl44dpmsb" path="res://IMGS/hell_underwater_cropped_buildings.png" id="1_frprk"]
@@ -13,9 +13,11 @@
 [ext_resource type="Texture2D" uid="uid://dmuqlisthyhib" path="res://IMGS/ui/All.png" id="8_esnyg"]
 [ext_resource type="Texture2D" uid="uid://ddm5pblkn10ls" path="res://IMGS/ui/UI_Flat_Banner02a.png" id="9_ljmh0"]
 [ext_resource type="Texture2D" uid="uid://bnnqc3a1e87xw" path="res://textpng.png" id="10_t8bxo"]
-[ext_resource type="Shader" uid="uid://6vfs4o4qrspc" path="res://shaders/hell.gdshader" id="11_dlrvt"]
+[ext_resource type="Shader" path="res://shaders/hell.gdshader" id="11_dlrvt"]
 [ext_resource type="AudioStream" uid="uid://d0qn18na686an" path="res://sounds/bubbles.mp3" id="15_e6enc"]
 [ext_resource type="PackedScene" uid="uid://bk8vlqanbro6t" path="res://scenes/oxygen_tank.tscn" id="16_3h0yo"]
+[ext_resource type="PackedScene" path="res://scenes/placid.tscn" id="17_e6enc"]
+[ext_resource type="PackedScene" path="res://scenes/ishin.tscn" id="18_3h0yo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7eldv"]
 texture = ExtResource("1_frprk")
@@ -377,10 +379,10 @@ visible = false
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1517018562]
 texture_filter = 1
-offset_left = -3127.0
-offset_top = -396.0
-offset_right = 4672.0
-offset_bottom = 7403.0
+offset_left = -2973.0
+offset_top = -51.0
+offset_right = 4826.0
+offset_bottom = 7748.0
 texture = ExtResource("1_esnyg")
 
 [node name="Layer0" type="TileMapLayer" parent="." unique_id=1198981392]
@@ -502,10 +504,10 @@ shape = SubResource("RectangleShape2D_uqt7h")
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1467106934]
 material = SubResource("ShaderMaterial_esnyg")
-offset_left = -4528.0
-offset_top = -637.0
-offset_right = 7949.0
-offset_bottom = 8116.0
+offset_left = -5468.0
+offset_top = -68.0
+offset_right = 7009.0
+offset_bottom = 8685.0
 
 [node name="BackBufferCopy" type="BackBufferCopy" parent="CanvasLayer" unique_id=709646085]
 
@@ -514,5 +516,44 @@ stream = ExtResource("15_e6enc")
 
 [node name="oxygen_tank" parent="." unique_id=1604457158 instance=ExtResource("16_3h0yo")]
 position = Vector2(935, -102)
+
+[node name="Area2D3" parent="." unique_id=1581930551 instance=ExtResource("17_e6enc")]
+position = Vector2(1247, 295)
+
+[node name="Area2D4" parent="." unique_id=38219193 instance=ExtResource("17_e6enc")]
+position = Vector2(161, 738)
+
+[node name="Area2D5" parent="." unique_id=1973862586 instance=ExtResource("18_3h0yo")]
+position = Vector2(-231, 748)
+
+[node name="Area2D6" parent="." unique_id=748593970 instance=ExtResource("17_e6enc")]
+position = Vector2(1564, 1119)
+
+[node name="Area2D7" parent="." unique_id=1319416967 instance=ExtResource("17_e6enc")]
+position = Vector2(1380, 3231)
+
+[node name="Area2D8" parent="." unique_id=630977496 instance=ExtResource("18_3h0yo")]
+position = Vector2(1823, 2467)
+
+[node name="Area2D9" parent="." unique_id=61168073 instance=ExtResource("18_3h0yo")]
+position = Vector2(-1828, 1898)
+
+[node name="Area2D10" parent="." unique_id=476230732 instance=ExtResource("17_e6enc")]
+position = Vector2(-1953, 1315)
+
+[node name="Area2D11" parent="." unique_id=761091228 instance=ExtResource("18_3h0yo")]
+position = Vector2(2264, 4200)
+
+[node name="Area2D" parent="Area2D11" unique_id=665884838 instance=ExtResource("17_e6enc")]
+position = Vector2(-1239, -295)
+
+[node name="Area2D" parent="Area2D11/Area2D" unique_id=1302035788 instance=ExtResource("18_3h0yo")]
+position = Vector2(-695, -3420)
+
+[node name="Area2D" parent="Area2D11/Area2D/Area2D" unique_id=675243373 instance=ExtResource("18_3h0yo")]
+position = Vector2(-128, -133)
+
+[node name="Area2D12" parent="." unique_id=1178249266 instance=ExtResource("17_e6enc")]
+position = Vector2(-1441, 679)
 
 [connection signal="body_entered" from="CharacterBody2D4/Area2D3" to="CharacterBody2D4" method="go_back"]
