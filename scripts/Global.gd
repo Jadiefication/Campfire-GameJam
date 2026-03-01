@@ -38,6 +38,9 @@ var max_hp: int = 100:
 		max_hp = value
 		max_hp_changed.emit(value)
 
+var game_time: float = 600.0
+signal time_changed(new_time)
+
 var show_leaderboard := false
 
 var save_path := "user://leaderboard.save"
@@ -52,6 +55,15 @@ func reset_game():
 	pipe_upgrade_cost = 500
 	hp_upgrade_cost = 500
 	speed_upgrade_cost = 500
+	game_time = 600.0
+
+func _process(delta: float):
+	if game_time > 0:
+		game_time -= delta
+		time_changed.emit(game_time)
+		if game_time <= 0:
+			game_time = 0
+			hp = 0
 
 func save_run():
 	var scores: Array = []
