@@ -25,3 +25,5 @@ var max_hp: int = 100:
 	set(value):
 		max_hp = value
 		max_hp_changed.emit(value)
+
+var show_leaderboard := false

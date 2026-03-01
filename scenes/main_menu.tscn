@@ -16,6 +16,8 @@
 [ext_resource type="AudioStream" uid="uid://crim4bo3kwb03" path="res://sounds/Voicy_ _Giggle_ Cute Anime Girl Sound Effect .mp3" id="13_rcqid"]
 [ext_resource type="AudioStream" uid="uid://bj41b7plalxsd" path="res://sounds/the-ringing-of-a-drop-from-the-cartoon.mp3" id="14_1ajci"]
 [ext_resource type="Texture2D" uid="uid://dtgyxy64kly7v" path="res://IMGS/title/R.png" id="14_5pajh"]
+[ext_resource type="Texture2D" uid="uid://ck1j72mboljk3" path="res://IMGS/UI_Flat_FrameSlot02a.png" id="17_a8gd2"]
+[ext_resource type="Texture2D" uid="uid://d3pf2eefy3g8c" path="res://IMGS/ui/UI_Flat_ButtonCross01a.png" id="18_hstxw"]
 
 [sub_resource type="Shader" id="1"]
 code = "shader_type canvas_item;
@@ -46,6 +48,9 @@ shader = SubResource("1")
 shader_parameter/speed = 0.28
 
 [sub_resource type="LabelSettings" id="LabelSettings_j7ex8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_a8gd2"]
+font_size = 24
 
 [node name="Control" type="Control" unique_id=420266252]
 layout_mode = 3
@@ -217,6 +222,48 @@ stream = ExtResource("13_rcqid")
 [node name="ButtonSound" type="AudioStreamPlayer2D" parent="." unique_id=1066155638]
 stream = ExtResource("14_1ajci")
 
+[node name="Leaderboard" type="TextureRect" parent="." unique_id=218140109]
+visible = false
+texture_filter = 1
+layout_mode = 0
+offset_left = 276.0
+offset_top = 30.0
+offset_right = 853.0
+offset_bottom = 607.0
+texture = ExtResource("17_a8gd2")
+
+[node name="Label" type="Label" parent="Leaderboard" unique_id=1494626344]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 109.0
+offset_right = 506.1989
+offset_bottom = 546.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Leaderboard" unique_id=1455706719]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 35.0
+offset_right = 512.1989
+offset_bottom = 79.0
+text = "Leaderboard"
+label_settings = SubResource("LabelSettings_a8gd2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Leaderboard" unique_id=1238237911]
+layout_mode = 0
+offset_left = 498.0
+offset_top = 14.0
+offset_right = 564.65
+offset_bottom = 76.0
+icon = ExtResource("18_hstxw")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
 [connection signal="pressed" from="Button2" to="Button" method="_on_credits_pressed"]
 [connection signal="pressed" from="Button3" to="Button" method="_on_quit_pressed"]
+[connection signal="pressed" from="Leaderboard/Button" to="Button" method="_on_close_lead"]

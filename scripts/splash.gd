@@ -1,19 +1,46 @@
 extends Control
 
+# --- NODE REFERENCES ---
 @onready var splash = $SplashOverlay
 @onready var logo = $SplashOverlay/SplashLogo
 @onready var splash_sound = $SplashSound
+@onready var music = $Music
+@onready var leaderboard = $Leaderboard
+@onready var leaderboard_label = $Leaderboard/Label
 
-func _ready():
-	# Wait 1.5 seconds
+# --- SAVE PATH ---
+var save_path := "user://leaderboard.save"
+
+# --- FUNCTIONS ---
+
+func load_leaderboard() -> Array:
+	if FileAccess.file_exists(save_path):
+		var file = FileAccess.open(save_path, FileAccess.READ)
+		if file:
+			var scores = file.get_var()
+			file.close()
+			return scores
+	return []
+
+func _ready() -> void:
+	# --- Splash Sequence ---
 	splash_sound.play()
 	await get_tree().create_timer(1.5).timeout
 
-	# Create one tween and fade both at once
 	var tween = create_tween()
 	tween.tween_property(splash, "modulate:a", 0.0, 1.0)
 	tween.tween_property(logo, "modulate:a", 0.0, 1.0)
 	await tween.finished
 
 	splash.visible = false
-	$Music.play()
+	music.play()
+
+	# --- Leaderboard Logic ---
+	if Global.show_leaderboard:
+		var scores = load_leaderboard()
+		if scores.size() > 0:
+			leaderboard.visible = true
+			leaderboard_label.text = str(scores)
+		else:
+			leaderboard.visible = false  # hide if empty
+		Global.show_leaderboard = false

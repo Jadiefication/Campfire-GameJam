@@ -11,34 +11,31 @@ var backgrounds = [
 var save_path := "user://leaderboard.save"
 
 func save_run():
-	var file = File.new()
-	var scores = []
+	var scores: Array = []
 
-	# Load existing scores if the file exists
-	if file.file_exists(save_path):
-		if file.open(save_path, File.READ) == OK:
+	# Load existing scores if file exists
+	if FileAccess.file_exists(save_path):
+		var file = FileAccess.open(save_path, FileAccess.READ)
+		if file:
 			scores = file.get_var()
 			file.close()
 
-	# Add the current run
+	# Add current run
 	scores.append(Global.total_money)
 
-	# Optionally, keep the list sorted descending
-	scores.sort_custom(self, "_sort_descending")
+	# Sort descending
+	scores.sort_custom(func(a, b): return a > b)
 
 	# Save updated scores
-	if file.open(save_path, File.WRITE) == OK:
+	var file = FileAccess.open(save_path, FileAccess.WRITE)
+	if file:
 		file.store_var(scores)
 		file.close()
 
-# Custom sort function for descending order
-func _sort_descending(a, b):
-	return b - a
-
 func load_leaderboard():
-	var file = File.new()
-	if file.file_exists(save_path):
-		if file.open(save_path, File.READ) == OK:
+	if FileAccess.file_exists(save_path):
+		var file = FileAccess.open(save_path, FileAccess.READ)
+		if file:
 			var scores = file.get_var()
 			file.close()
 			return scores

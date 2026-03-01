@@ -29,3 +29,7 @@ func transition_to_scene(scene_path: String) -> void:
 	await tween.finished
 
 	get_tree().change_scene_to_file(scene_path)
+
+
+func _on_close_lead() -> void:
+	get_parent().get_node("Leaderboard").visible = false
