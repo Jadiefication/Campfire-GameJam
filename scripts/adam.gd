@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 # --- EXPORT VARIABLES ---
 @export var speed: float = 200.0
-@export var rope_length_org: float = Global.rope_length
+var rope_length_org: float = 1050
 var rope_length_2: float = rope_length_org - 1600
 
 @export var hp: Array[AtlasTexture]
@@ -11,16 +11,14 @@ var rope_length_2: float = rope_length_org - 1600
 var GRAVITY: float = 1200.0
 const JUMP_VELOCITY: float = -600
 
-var hp_current: int = 100
-var current_max_hp: int = 100
-
 # --- NODE REFERENCES ---
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var bubbles_node = get_parent().get_node("Bubbles")
-@onready var rope_line = get_parent().get_node("PinJoint2D/Line2D")
-@onready var hook = get_parent().get_node("oxygen_tank")
+@onready var bubbles_node = get_parent().get_node_or_null("Bubbles")
+@onready var rope_line = get_parent().get_node_or_null("PinJoint2D/Line2D")
+@onready var hook = get_parent().get_node_or_null("oxygen_tank")
 
 # --- INTERNAL VARIABLES ---
+var current_max_hp: int = 100
 var rope_active: bool = false
 var hook_position: Vector2 = Vector2.ZERO
 
@@ -29,6 +27,9 @@ func _ready() -> void:
 	Global.money_changed.connect(change_money)
 	Global.hp_changed.connect(change_hp)
 	Global.max_hp_changed.connect(change_max_hp)
+	Global.rope_length_changed.connect(change_rope_length)
+	rope_length_org = Global.rope_length
+	rope_length_2 = rope_length_org - 1600
 	if hook:
 		hook_position = hook.global_position
 		rope_active = true
@@ -36,10 +37,12 @@ func _ready() -> void:
 	sprite.animation_finished.connect(_on_animation_finished)
 	sprite.play("Idle")
 	
+	# Initial UI update
+	change_hp(Global.hp)
+	
 	if get_parent().name == "World1":
 		GRAVITY /= 2
 		speed /= 2
-		Global.hp = 100
 
 func change_hp(new_hp: int):
 	new_hp = clamp(new_hp, 0, current_max_hp)
@@ -72,6 +75,9 @@ func change_max_hp(new_max_hp: int):
 	current_max_hp = new_max_hp
 	Global.hp = new_hp
 	
+func change_rope_length(new_length: int):
+	rope_length_org = float(new_length)
+	rope_length_2 = rope_length_org - 1600
 		
 func change_money(money):
 	if get_node_or_null("Camera2D") != null:
