@@ -16,16 +16,16 @@
 [ext_resource type="AudioStream" uid="uid://0npph65pat50" path="res://sounds/ytmp3free.cc_submerged-ocean-ambient-music-underwater-sounds-youtubemp3free.org.mp3" id="8_myhk2"]
 [ext_resource type="PackedScene" uid="uid://c1v7a5htiqcsp" path="res://scenes/player.tscn" id="9_txjws"]
 [ext_resource type="Script" uid="uid://bnhodst1lsw4l" path="res://scripts/adam.gd" id="10_127b4"]
-[ext_resource type="Shader" uid="uid://e7igo45fo1by" path="res://shaders/ocean.gdshader" id="11_05jtr"]
+[ext_resource type="Shader" path="res://shaders/ocean.gdshader" id="11_05jtr"]
 [ext_resource type="PackedScene" uid="uid://bk8vlqanbro6t" path="res://scenes/oxygen_tank.tscn" id="12_wak0d"]
 [ext_resource type="Texture2D" uid="uid://bcmhr181vs24h" path="res://IMGS/pipe.png" id="13_emdhy"]
 [ext_resource type="Texture2D" uid="uid://dmuqlisthyhib" path="res://IMGS/ui/All.png" id="15_xg242"]
 [ext_resource type="AudioStream" uid="uid://d0qn18na686an" path="res://sounds/bubbles.mp3" id="19_ogfxj"]
-[ext_resource type="PackedScene" uid="uid://dvy1ymmd68kn" path="res://scenes/siren.tscn" id="21_vvx7h"]
-[ext_resource type="PackedScene" uid="uid://bkjcp4r0anglr" path="res://scenes/gold_chest.tscn" id="22_6xfuw"]
-[ext_resource type="PackedScene" uid="uid://dq2nteehp5hlu" path="res://scenes/ishin.tscn" id="23_yop7p"]
-[ext_resource type="PackedScene" uid="uid://bf8n3nmp4jlgd" path="res://scenes/placid.tscn" id="24_lvqyh"]
-[ext_resource type="PackedScene" uid="uid://c0b3acncdydmj" path="res://scenes/amorem.tscn" id="25_5acj2"]
+[ext_resource type="PackedScene" path="res://scenes/siren.tscn" id="21_vvx7h"]
+[ext_resource type="PackedScene" path="res://scenes/gold_chest.tscn" id="22_6xfuw"]
+[ext_resource type="PackedScene" path="res://scenes/ishin.tscn" id="23_yop7p"]
+[ext_resource type="PackedScene" path="res://scenes/placid.tscn" id="24_lvqyh"]
+[ext_resource type="PackedScene" path="res://scenes/amorem.tscn" id="25_5acj2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vvx7h"]
 size = Vector2(2090, 498)
@@ -2554,8 +2554,6 @@ region = Rect2(1107, 37, 42, 7)
 font_size = 20
 font_color = Color(0, 0, 0, 1)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_xg242"]
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5b7n5"]
 shader = ExtResource("11_05jtr")
 shader_parameter/tint_color = Vector3(0, 0.4, 0.7)
@@ -2711,7 +2709,7 @@ offset_bottom = 35.0
 text = "0$"
 label_settings = SubResource("LabelSettings_jhl44")
 
-[node name="TimerLabel" type="Label" parent="CharacterBody2D/Camera2D/Banner"]
+[node name="TimerLabel" type="Label" parent="CharacterBody2D/Camera2D/Banner" unique_id=438969739]
 texture_filter = 1
 layout_mode = 0
 offset_left = 44.0
@@ -2729,9 +2727,6 @@ offset_top = -218.0
 offset_right = 340.0
 offset_bottom = -18.730042
 texture = ExtResource("2_7ykll")
-
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1451621483]
-sprite_frames = SubResource("SpriteFrames_xg242")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=640104217]
 

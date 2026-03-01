@@ -15,7 +15,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
 radius = 18.0
-height = 115.0
+height = 112.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g2els"]
 animations = [{
@@ -95,16 +95,14 @@ animations = [{
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=862562871 groups=["player"]]
-position = Vector2(-4, 19)
+position = Vector2(-8, 20)
 shape = SubResource("CapsuleShape2D_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2082134256 groups=["player"]]
-position = Vector2(-5.000002, 17.62501)
-scale = Vector2(0.08720931, 0.08992689)
+position = Vector2(-9.999999, 20)
+scale = Vector2(0.08920786, 0.08881524)
 sprite_frames = SubResource("SpriteFrames_g2els")
-animation = &"Swim"
-frame = 1
-frame_progress = 0.59443736
+animation = &"Idle"
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=827045815]
 texture_filter = 1
