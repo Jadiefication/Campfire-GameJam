@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed := 80
+@export var speed := 100
 var player: Node2D
 var is_active := false
 var can_damage := false

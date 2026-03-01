@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 # --- EXPORT VARIABLES ---
-@export var speed: float = 200.0
-@export var rope_length_org: float = Global.rope_length
+@export var speed: float = 300
+var rope_length_org: float = 1050
 var rope_length_2: float = rope_length_org - 1600
 
 @export var hp: Array[AtlasTexture]
@@ -11,16 +11,15 @@ var rope_length_2: float = rope_length_org - 1600
 var GRAVITY: float = 1200.0
 const JUMP_VELOCITY: float = -600
 
-var hp_current: int = 100
-var current_max_hp: int = 100
-
 # --- NODE REFERENCES ---
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var bubbles_node = get_parent().get_node("Bubbles")
-@onready var rope_line = get_parent().get_node("PinJoint2D/Line2D")
-@onready var hook = get_parent().get_node("oxygen_tank")
+@onready var bubbles_node = get_parent().get_node_or_null("Bubbles")
+@onready var rope_line = get_parent().get_node_or_null("PinJoint2D/Line2D")
+@onready var hook = get_parent().get_node_or_null("oxygen_tank")
+var save_path := "user://leaderboard.save"
 
 # --- INTERNAL VARIABLES ---
+var current_max_hp: int = 100
 var rope_active: bool = false
 var hook_position: Vector2 = Vector2.ZERO
 
@@ -29,6 +28,10 @@ func _ready() -> void:
 	Global.money_changed.connect(change_money)
 	Global.hp_changed.connect(change_hp)
 	Global.max_hp_changed.connect(change_max_hp)
+	Global.rope_length_changed.connect(change_rope_length)
+	Global.speed_changed.connect(change_speed)
+	rope_length_org = Global.rope_length
+	rope_length_2 = rope_length_org - 1600
 	if hook:
 		hook_position = hook.global_position
 		rope_active = true
@@ -36,16 +39,27 @@ func _ready() -> void:
 	sprite.animation_finished.connect(_on_animation_finished)
 	sprite.play("Idle")
 	
+	# Initial UI update
+	change_hp(Global.hp)
+	
 	if get_parent().name == "World1":
 		GRAVITY /= 2
-		speed /= 2
-		Global.hp = 100
+		speed = Global.speed / 2
+	else:
+		speed = Global.speed
+
+func change_speed(new_speed: float):
+	if get_parent().name == "World1":
+		speed = new_speed / 2
+	else:
+		speed = new_speed
 
 func change_hp(new_hp: int):
 	new_hp = clamp(new_hp, 0, current_max_hp)
 	
 	if new_hp == 0:
 		$AudioStreamPlayer2D.play()
+		Global.show_leaderboard = true
 		change_scenes("res://scenes/main_menu.tscn")
 	
 	if hp.size() == 0:
@@ -72,6 +86,9 @@ func change_max_hp(new_max_hp: int):
 	current_max_hp = new_max_hp
 	Global.hp = new_hp
 	
+func change_rope_length(new_length: int):
+	rope_length_org = float(new_length)
+	rope_length_2 = rope_length_org - 1600
 		
 func change_money(money):
 	if get_node_or_null("Camera2D") != null:
@@ -190,15 +207,15 @@ func on_enter_water(body: Node2D) -> void:
 	if body == self and bubbles_node:
 		change_scenes("res://scenes/mapa_pls.tscn")
 		
-func change_scenes(new_scene: String):
+func change_scenes(new_scene: String, _after_change: Callable = Callable()):
 	bubbles_node.visible = true
 	var mat = bubbles_node.get_node("ColorRect").material
 	get_parent().get_node("BubbleSFX").play()
 	var tween = create_tween()
 			
-	tween.tween_property(mat, "shader_parameter/transition_fill", 1.5, 0.6).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(mat, "shader_parameter/transition_fill", 1.5, 0.6)
 	tween.tween_interval(1.0)
-	tween.tween_property(mat, "shader_parameter/transition_fill", 0.0, 0.6).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(mat, "shader_parameter/transition_fill", 0.0, 0.6)
 			
 	tween.tween_callback(func(): 
 		bubbles_node.visible = false
@@ -214,3 +231,12 @@ func go_next_level(body: Node2D) -> void:
 func go_back(body: Node2D) -> void:
 	if body == self and bubbles_node:
 		change_scenes("res://scenes/mapa_pls.tscn")
+		
+func load_leaderboard():
+	if FileAccess.file_exists(save_path):
+		var file = FileAccess.open(save_path, FileAccess.READ)
+		if file:
+			var scores = file.get_var()
+			file.close()
+			return scores
+	return []
