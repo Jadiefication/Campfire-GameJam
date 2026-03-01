@@ -2,7 +2,8 @@ extends CharacterBody2D
 
 # --- EXPORT VARIABLES ---
 @export var speed: float = 200.0
-@export var rope_length: float = 500.0
+@export var rope_length_org: float = Global.rope_length
+var rope_length_2: float = rope_length_org - 1600
 
 @export var hp: Array[AtlasTexture]
 
@@ -110,7 +111,7 @@ func _physics_process(delta: float) -> void:
 		if sprite.animation == "Walk":
 			sprite.play("Idle")
 			
-	if get_parent().name == "World1":
+	if get_parent().name.contains("World"):
 		if Input.is_key_pressed(Key.KEY_W):
 			velocity.y = JUMP_VELOCITY / 4
 		if Input.is_key_pressed(Key.KEY_S):
@@ -123,24 +124,36 @@ func _physics_process(delta: float) -> void:
 		var to_player = global_position - hook_position
 		var dist = to_player.length()
 
-		if dist > rope_length and dist != 0:
-			var dir = to_player / dist
-			var excess = dist - rope_length
-			global_position -= dir * excess
+		if get_parent().name == "World2":
+			if dist > rope_length_2 and dist != 0:
+				var dir = to_player / dist
+				var excess = dist - rope_length_2
+				global_position -= dir * excess
+			
+				var tangent = Vector2(-dir.y, dir.x)
+				velocity = velocity.project(tangent)
+		else:
+			if dist > rope_length_org and dist != 0:
+				var dir = to_player / dist
+				var excess = dist - rope_length_org
+				global_position -= dir * excess
 
-			var tangent = Vector2(-dir.y, dir.x)
-			velocity = velocity.project(tangent)
+				var tangent = Vector2(-dir.y, dir.x)
+				velocity = velocity.project(tangent)
 
 	move_and_slide()
 
 	# --- ROPE VISUAL ---
 	if rope_active and rope_line:
-		update_rope_visuals()
+		if get_parent().name == "World2":
+			update_rope_visuals(rope_length_2)
+		else:
+			update_rope_visuals(rope_length_org)
 
 # ---------------- HELPERS ----------------
 
-func update_rope_visuals() -> void:
-	var segments = clamp(int(rope_length / 5), 2, 50)
+func update_rope_visuals(length: float) -> void:
+	var segments = clamp(int(length / 5), 2, 500)
 	var points = []
 	for i in range(segments + 1):
 		var t = float(i) / segments
@@ -172,3 +185,13 @@ func change_scenes(new_scene: String):
 		bubbles_node.visible = false
 		get_tree().change_scene_to_file(new_scene)
 	)
+
+
+func go_next_level(body: Node2D) -> void:
+	if body == self and bubbles_node:
+		change_scenes("res://scenes/hell_underwater.tscn")
+
+
+func go_back(body: Node2D) -> void:
+	if body == self and bubbles_node:
+		change_scenes("res://scenes/mapa_pls.tscn")

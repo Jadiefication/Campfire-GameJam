@@ -17,3 +17,4 @@ var hp: int = 100:
 		hp_changed.emit(value)
 		
 var total_money: int = 0
+var rope_length = 1250
