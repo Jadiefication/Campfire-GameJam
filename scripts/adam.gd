@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 # --- EXPORT VARIABLES ---
-@export var speed: float = 200.0
+@export var speed: float = 300
 var rope_length_org: float = 1050
 var rope_length_2: float = rope_length_org - 1600
 
