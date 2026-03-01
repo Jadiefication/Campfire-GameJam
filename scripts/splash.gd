@@ -40,7 +40,14 @@ func _ready() -> void:
 		var scores = load_leaderboard()
 		if scores.size() > 0:
 			leaderboard.visible = true
-			leaderboard_label.text = str(scores)
+			
+			# Format the top 5 scores
+			var display_text = "LEADERBOARD\n"
+			var limit = min(scores.size(), 5)
+			for i in range(limit):
+				display_text += str(i + 1) + ". $" + str(scores[i]) + "\n"
+			
+			leaderboard_label.text = display_text
 		else:
 			leaderboard.visible = false  # hide if empty
 		Global.show_leaderboard = false

@@ -8,39 +8,6 @@ var backgrounds = [
 	preload("res://IMGS/mor.jpeg")
 ]
 
-var save_path := "user://leaderboard.save"
-
-func save_run():
-	var scores: Array = []
-
-	# Load existing scores if file exists
-	if FileAccess.file_exists(save_path):
-		var file = FileAccess.open(save_path, FileAccess.READ)
-		if file:
-			scores = file.get_var()
-			file.close()
-
-	# Add current run
-	scores.append(Global.total_money)
-
-	# Sort descending
-	scores.sort_custom(func(a, b): return a > b)
-
-	# Save updated scores
-	var file = FileAccess.open(save_path, FileAccess.WRITE)
-	if file:
-		file.store_var(scores)
-		file.close()
-
-func load_leaderboard():
-	if FileAccess.file_exists(save_path):
-		var file = FileAccess.open(save_path, FileAccess.READ)
-		if file:
-			var scores = file.get_var()
-			file.close()
-			return scores
-	return []
-
 @export var transition_time := 1.5
 var index := 0
 var showing_a := true  # which TextureRect is currently visible
@@ -50,7 +17,7 @@ func _ready():
 	$Background.modulate.a = 1.0
 	$Backgg.modulate.a = 0.0
 	$Timer.timeout.connect(_on_timer_timeout)
-	get_tree().about_to_quit.connect(save_run)
+	get_tree().about_to_quit.connect(Global.save_run)
 
 func _on_timer_timeout():
 	# move to the next image in order

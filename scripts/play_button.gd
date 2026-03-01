@@ -5,6 +5,7 @@ extends Button
 
 func _on_pressed() -> void:
 	get_parent().get_node("ButtonSound").play()
+	Global.reset_game()
 	await transition_to_scene("res://scenes/base.tscn")
 
 func _on_credits_pressed() -> void:

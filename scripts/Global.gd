@@ -39,3 +39,32 @@ var max_hp: int = 100:
 		max_hp_changed.emit(value)
 
 var show_leaderboard := false
+
+var save_path := "user://leaderboard.save"
+
+func reset_game():
+	money = 0
+	hp = 100
+	total_money = 0
+	rope_length = 1050
+	speed = 300
+	max_hp = 100
+	pipe_upgrade_cost = 500
+	hp_upgrade_cost = 500
+	speed_upgrade_cost = 500
+
+func save_run():
+	var scores: Array = []
+	if FileAccess.file_exists(save_path):
+		var file = FileAccess.open(save_path, FileAccess.READ)
+		if file:
+			scores = file.get_var()
+			file.close()
+
+	scores.append(total_money)
+	scores.sort_custom(func(a, b): return a > b)
+
+	var file = FileAccess.open(save_path, FileAccess.WRITE)
+	if file:
+		file.store_var(scores)
+		file.close()

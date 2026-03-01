@@ -16,8 +16,6 @@ const JUMP_VELOCITY: float = -600
 @onready var bubbles_node = get_parent().get_node_or_null("Bubbles")
 @onready var rope_line = get_parent().get_node_or_null("PinJoint2D/Line2D")
 @onready var hook = get_parent().get_node_or_null("oxygen_tank")
-var save_path := "user://leaderboard.save"
-
 # --- INTERNAL VARIABLES ---
 var current_max_hp: int = 100
 var rope_active: bool = false
@@ -41,6 +39,7 @@ func _ready() -> void:
 	
 	# Initial UI update
 	change_hp(Global.hp)
+	change_money(Global.money)
 	
 	if get_parent().name == "World1":
 		GRAVITY /= 2
@@ -59,6 +58,7 @@ func change_hp(new_hp: int):
 	
 	if new_hp == 0:
 		$AudioStreamPlayer2D.play()
+		Global.save_run()
 		Global.show_leaderboard = true
 		change_scenes("res://scenes/main_menu.tscn")
 	
@@ -231,12 +231,3 @@ func go_next_level(body: Node2D) -> void:
 func go_back(body: Node2D) -> void:
 	if body == self and bubbles_node:
 		change_scenes("res://scenes/mapa_pls.tscn")
-		
-func load_leaderboard():
-	if FileAccess.file_exists(save_path):
-		var file = FileAccess.open(save_path, FileAccess.READ)
-		if file:
-			var scores = file.get_var()
-			file.close()
-			return scores
-	return []
