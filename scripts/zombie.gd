@@ -14,6 +14,7 @@ func _ready():
 	$Area2D.body_exited.connect(_on_area_2d_body_exited)
 	
 	$hitbox.body_entered.connect(_on_hitbox_body_entered)
+	$AnimatedSprite2D.play("swimming")
 
 	await get_tree().physics_frame
 	can_damage = true
@@ -43,6 +44,13 @@ func _physics_process(delta):
 
 	if player:
 		var to_player = player.global_position - global_position
+		$AnimatedSprite2D.play("swimming")
+		# Flip horizontally based on the player's position relative to the zombie
+		if to_player.x < 0:
+			$AnimatedSprite2D.flip_h = false  # Player is to the left
+		elif to_player.x > 0:
+			$AnimatedSprite2D.flip_h = true   # Player is to the right
+
 		if to_player.length() > 0.01:
 			velocity = to_player.normalized() * speed
 		else:

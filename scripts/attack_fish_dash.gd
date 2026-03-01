@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed := 140
+@export var speed := 170
 @export var lifetime := 10.0   # safety lifetime in seconds
 
 var player: Node2D
@@ -58,7 +58,7 @@ func _physics_process(delta):
 		var collider = col.get_collider()
 		print_debug("EnemyFish collided with: ", collider, " (type=", typeof(collider), ", name=", (collider and collider.name))
 		if collider and collider.is_in_group("player"):
-			Global.hp -= 20
+			Global.hp -= 25
 			explode()
 			stop_movement()
 			return

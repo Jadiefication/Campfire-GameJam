@@ -103,8 +103,7 @@ position = Vector2(-5.000002, 17.62501)
 scale = Vector2(0.08720931, 0.08992689)
 sprite_frames = SubResource("SpriteFrames_g2els")
 animation = &"Swim"
-frame = 1
-frame_progress = 0.59443736
+frame_progress = 0.59169394
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=827045815]
 texture_filter = 1
