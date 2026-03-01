@@ -35,12 +35,13 @@ offset_left = -167.0
 offset_top = -106.0
 offset_right = -26.0
 offset_bottom = -57.0
-text = "press e to interact
+text = "Press E to interact
 "
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=279044118]
 
 [node name="ItemList" type="ItemList" parent="CanvasLayer" unique_id=279044117]
+visible = false
 texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
