@@ -1,5 +1,6 @@
 extends Node
-
+var pipe_upgrade_cost: int = 500
+var hp_upgrade_cost: int = 500
 signal money_changed(new_amount)
 
 var money: int = 0:
@@ -17,8 +18,12 @@ var hp: int = 100:
 		hp_changed.emit(value)
 		
 var total_money: int = 0
-var rope_length = 1250
+var rope_length: int = 1050:
+	set(value):
+		rope_length = value
+		rope_length_changed.emit(value)
 
+signal rope_length_changed(new_amount)
 signal max_hp_changed(new_amount)
 
 var max_hp: int = 100:
