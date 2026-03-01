@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://bnhodst1lsw4l" path="res://scripts/adam.gd" id="9_dmaw2"]
 [ext_resource type="Texture2D" uid="uid://bcmhr181vs24h" path="res://IMGS/pipe.png" id="12_dmaw2"]
 [ext_resource type="AudioStream" uid="uid://d0qn18na686an" path="res://sounds/bubbles.mp3" id="13_1xxg6"]
-[ext_resource type="PackedScene" uid="uid://buxh6wc56mupk" path="res://scenes/chest.tscn" id="14_517kj"]
 [ext_resource type="Script" path="res://scripts/banner.gd" id="14_ot4hf"]
 [ext_resource type="PackedScene" uid="uid://bvcud62dcxpx2" path="res://scenes/shop.tscn" id="15_ot4hf"]
 [ext_resource type="Texture2D" uid="uid://ddm5pblkn10ls" path="res://IMGS/ui/UI_Flat_Banner02a.png" id="15_vciil"]
@@ -158,9 +157,6 @@ texture_mode = 1
 [node name="BubbleSFX" type="AudioStreamPlayer2D" parent="." unique_id=379561679]
 stream = ExtResource("13_1xxg6")
 
-[node name="Chest" parent="." unique_id=1329740356 instance=ExtResource("14_517kj")]
-position = Vector2(931, 423)
-
 [node name="Banner" type="TextureRect" parent="." unique_id=1873500335]
 texture_filter = 1
 offset_left = 878.0
@@ -182,6 +178,6 @@ text = "0$"
 label_settings = SubResource("LabelSettings_ot4hf")
 
 [node name="Area2D2" parent="." unique_id=833320345 instance=ExtResource("15_ot4hf")]
-position = Vector2(501, 537)
+position = Vector2(1067, 359)
 
 [connection signal="body_entered" from="Area2D" to="NiggAdam" method="on_enter_water"]

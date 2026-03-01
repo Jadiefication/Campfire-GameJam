@@ -1,17 +1,17 @@
-[gd_scene format=3 uid="uid://buxh6wc56mupk"]
+[gd_scene format=3 uid="uid://b8xviliclgldr"]
 
-[ext_resource type="Script" uid="uid://d1mvf3yiqpfd4" path="res://scripts/chest.gd" id="1_gqd3d"]
-[ext_resource type="Texture2D" uid="uid://ce1bnvobvge41" path="res://IMGS/closed_chest.png" id="1_sy5e1"]
-[ext_resource type="Texture2D" uid="uid://6tgfuar16e5b" path="res://IMGS/open_chest.png" id="2_gqd3d"]
+[ext_resource type="Script" uid="uid://d1mvf3yiqpfd4" path="res://scripts/chest.gd" id="1_hnpmi"]
+[ext_resource type="Texture2D" uid="uid://d32u1hvarxw8" path="res://player imgs/iron_closed_chest(1).png" id="2_hnpmi"]
+[ext_resource type="Texture2D" uid="uid://b5qj3r6piba6b" path="res://player imgs/iron_open_chest(1).png" id="3_ofw7p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sy5e1"]
 radius = 6.366667
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_yue2o"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_2xyl1"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_sy5e1")
+"texture": ExtResource("2_hnpmi")
 }],
 "loop": true,
 "name": &"closed",
@@ -19,7 +19,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_gqd3d")
+"texture": ExtResource("3_ofw7p")
 }],
 "loop": true,
 "name": &"open",
@@ -31,9 +31,8 @@ size = Vector2(72, 67)
 
 [node name="Chest" type="Area2D" unique_id=1329740356]
 collision_layer = 2
-script = ExtResource("1_gqd3d")
-min_money = 800
-max_money = 1500
+script = ExtResource("1_hnpmi")
+min_money = 1500
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=972433500]
 scale = Vector2(30, 30)
@@ -42,7 +41,7 @@ shape = SubResource("CircleShape2D_sy5e1")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1844558327]
 texture_filter = 1
 scale = Vector2(4.3125, 4.125)
-sprite_frames = SubResource("SpriteFrames_yue2o")
+sprite_frames = SubResource("SpriteFrames_2xyl1")
 animation = &"closed"
 
 [node name="Label" type="Label" parent="." unique_id=1161149135]

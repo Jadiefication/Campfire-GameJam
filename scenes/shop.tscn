@@ -1,15 +1,15 @@
 [gd_scene format=3 uid="uid://bvcud62dcxpx2"]
 
-[ext_resource type="Texture2D" uid="uid://d0285k5iabi3g" path="res://icon.svg" id="1_lx5au"]
 [ext_resource type="Script" uid="uid://dd6xp7wdugh68" path="res://scripts/shop.gd" id="1_xfvoa"]
+[ext_resource type="Texture2D" uid="uid://c16wsu4a2dm1t" path="res://IMGS/baka.png" id="2_032fp"]
 [ext_resource type="Texture2D" uid="uid://dwtfoy63rjogt" path="res://IMGS/ui/upgrade/hp.png" id="3_032fp"]
 [ext_resource type="Texture2D" uid="uid://db8a0xthxi382" path="res://IMGS/ui/upgrade/pipe.png" id="4_2fc2m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xfvoa"]
-radius = 146.18481
+radius = 245.00204
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1l46r"]
-size = Vector2(124, 127.5)
+size = Vector2(233.5, 230)
 
 [node name="Area2D" type="Area2D" unique_id=833320345]
 script = ExtResource("1_xfvoa")
@@ -18,12 +18,14 @@ script = ExtResource("1_xfvoa")
 shape = SubResource("CircleShape2D_xfvoa")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=482533023]
-texture = ExtResource("1_lx5au")
+scale = Vector2(0.33119202, 0.30856323)
+texture = ExtResource("2_032fp")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1907545969]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1234104252]
-position = Vector2(1, 1.25)
+position = Vector2(6, 2)
 shape = SubResource("RectangleShape2D_1l46r")
 
 [node name="Label" type="Label" parent="." unique_id=72443723]
